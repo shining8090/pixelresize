@@ -54,10 +54,11 @@ if (selectBtn) {
     });
 }
 
-    if (dropZone) {
-        dropZone.addEventListener('click', () => {
-            if (!originalImage) fileInput.click();
-        });
+if (dropZone) {
+    dropZone.addEventListener('click', (e) => {
+        if (e.target === selectBtn) return; // prevent conflict with button
+        if (!originalImage) fileInput.click();
+    });
 
         // Drag and Drop
         dropZone.addEventListener('dragover', (e) => {
