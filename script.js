@@ -1,4 +1,4 @@
-import Cropper from 'cropperjs';
+import Cropper from 'https://unpkg.com/cropperjs@1.6.2/dist/cropper.esm.js';
 
 // Elements
 const dropZone = document.getElementById('drop-zone');
