@@ -42,7 +42,19 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
+    app.use(express.static(distPath, { extensions: ["html"] }));
+    
+    // Specific routes for cleaner URLs if needed, or let static handle it
+    app.get("/about", (req, res) => res.sendFile(path.join(distPath, "about.html")));
+    app.get("/privacy", (req, res) => res.sendFile(path.join(distPath, "privacy.html")));
+    app.get("/terms", (req, res) => res.sendFile(path.join(distPath, "terms.html")));
+    app.get("/contact", (req, res) => res.sendFile(path.join(distPath, "contact.html")));
+    app.get("/tools/gif-to-webp", (req, res) => res.sendFile(path.join(distPath, "tools/gif-to-webp/index.html")));
+    app.get("/blog/how-to-resize-images-online", (req, res) => res.sendFile(path.join(distPath, "blog/how-to-resize-images-online/index.html")));
+    app.get("/blog/best-image-format-for-websites", (req, res) => res.sendFile(path.join(distPath, "blog/best-image-format-for-websites/index.html")));
+    app.get("/blog/seo-image-optimization-guide", (req, res) => res.sendFile(path.join(distPath, "blog/seo-image-optimization-guide/index.html")));
+    app.get("/blog/best-image-formats-for-animated-content", (req, res) => res.sendFile(path.join(distPath, "blog/best-image-formats-for-animated-content/index.html")));
+
     app.get("*", (req, res) => {
       res.sendFile(path.join(distPath, "index.html"));
     });

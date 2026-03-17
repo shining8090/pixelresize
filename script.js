@@ -226,8 +226,31 @@ if (dropZone) {
         });
     }
 
+    if (checkMetadata) {
+        checkMetadata.addEventListener('change', () => {
+            if (downloadBtn) downloadBtn.disabled = true;
+            updateEstimatedSize();
+        });
+    }
+
     if (selectFormat) {
         selectFormat.addEventListener('change', () => {
+            const format = selectFormat.value;
+            const qualityGroup = inputQuality ? inputQuality.closest('.control-group') : null;
+            
+            if (qualityGroup) {
+                const label = qualityGroup.querySelector('label');
+                if (format === 'image/jpeg' || format === 'image/webp' || format === 'image/avif') {
+                    qualityGroup.style.display = 'block';
+                    if (label) {
+                        const formatName = format.split('/')[1].toUpperCase().replace('JPEG', 'JPG');
+                        label.textContent = `${formatName} Quality`;
+                    }
+                } else {
+                    qualityGroup.style.display = 'none';
+                }
+            }
+            
             if (downloadBtn) downloadBtn.disabled = true;
             updateEstimatedSize();
         });
@@ -248,6 +271,8 @@ if (dropZone) {
             
             canvas.width = w;
             canvas.height = h;
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
             ctx.drawImage(originalImage, 0, 0, w, h);
             
             const format = selectFormat.value;
@@ -291,6 +316,8 @@ if (dropZone) {
             
             canvas.width = w;
             canvas.height = h;
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
             ctx.drawImage(originalImage, 0, 0, w, h);
             
             const format = selectFormat.value;
@@ -321,6 +348,90 @@ if (dropZone) {
         });
     }
 
+    // Transformation Buttons
+    const rotateBtn = document.getElementById('rotate-btn');
+    const flipHBtn = document.getElementById('flip-h-btn');
+    const flipVBtn = document.getElementById('flip-v-btn');
+    const base64Btn = document.getElementById('base64-btn');
+
+    if (rotateBtn) {
+        rotateBtn.addEventListener('click', () => {
+            if (!originalImage) return;
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = originalImage.height;
+            canvas.height = originalImage.width;
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+            ctx.rotate(Math.PI / 2);
+            ctx.drawImage(originalImage, -originalImage.width / 2, -originalImage.height / 2);
+            updateOriginalImage(canvas.toDataURL(originalFile ? originalFile.type : 'image/png'));
+        });
+    }
+
+    if (flipHBtn) {
+        flipHBtn.addEventListener('click', () => {
+            if (!originalImage) return;
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = originalImage.width;
+            canvas.height = originalImage.height;
+            ctx.translate(canvas.width, 0);
+            ctx.scale(-1, 1);
+            ctx.drawImage(originalImage, 0, 0);
+            updateOriginalImage(canvas.toDataURL(originalFile ? originalFile.type : 'image/png'));
+        });
+    }
+
+    if (flipVBtn) {
+        flipVBtn.addEventListener('click', () => {
+            if (!originalImage) return;
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = originalImage.width;
+            canvas.height = originalImage.height;
+            ctx.translate(0, canvas.height);
+            ctx.scale(1, -1);
+            ctx.drawImage(originalImage, 0, 0);
+            updateOriginalImage(canvas.toDataURL(originalFile ? originalFile.type : 'image/png'));
+        });
+    }
+
+    if (base64Btn) {
+        base64Btn.addEventListener('click', () => {
+            if (!originalImage) return;
+            const canvas = document.createElement('canvas');
+            canvas.width = originalImage.width;
+            canvas.height = originalImage.height;
+            canvas.getContext('2d').drawImage(originalImage, 0, 0);
+            const base64 = canvas.toDataURL(originalFile ? originalFile.type : 'image/png');
+            
+            navigator.clipboard.writeText(base64).then(() => {
+                const originalText = base64Btn.textContent;
+                base64Btn.textContent = 'Copied!';
+                setTimeout(() => base64Btn.textContent = originalText, 2000);
+            }).catch(() => {
+                alert('Failed to copy Base64 to clipboard. Check console.');
+                console.log(base64);
+            });
+        });
+    }
+
+    function updateOriginalImage(dataUrl) {
+        const img = new Image();
+        img.onload = () => {
+            originalImage = img;
+            aspectRatio = img.width / img.height;
+            if (imagePreview) imagePreview.src = dataUrl;
+            if (inputWidth) inputWidth.value = img.width;
+            if (inputHeight) inputHeight.value = img.height;
+            if (cropper) {
+                cropper.replace(dataUrl);
+            }
+            updateEstimatedSize();
+        };
+        img.src = dataUrl;
+    }
+
     function formatBytes(bytes, decimals = 2) {
         if (bytes === 0) return '0 Bytes';
         const k = 1024;
@@ -332,7 +443,11 @@ if (dropZone) {
 
     function applyPendingSettings() {
         if (!pendingSettings) return;
-        if (pendingSettings.format && selectFormat) selectFormat.value = pendingSettings.format;
+        if (pendingSettings.format && selectFormat) {
+            selectFormat.value = pendingSettings.format;
+            // Trigger change event to update quality slider visibility
+            selectFormat.dispatchEvent(new Event('change'));
+        }
         if (pendingSettings.quality && inputQuality) {
             inputQuality.value = pendingSettings.quality;
             if (qualityLabel) qualityLabel.textContent = `${pendingSettings.quality}%`;
@@ -422,6 +537,9 @@ if (dropZone) {
     // Tool card behavior: Scroll to #upload and trigger upload
     document.querySelectorAll('.tool-card a').forEach(link => {
         link.addEventListener('click', (e) => {
+            // If it's a blog card, let it navigate normally
+            if (link.closest('.blog-card')) return;
+
             e.preventDefault();
             
             const h3 = link.querySelector('h3');
@@ -433,7 +551,7 @@ if (dropZone) {
                 pendingSettings = { format: 'image/jpeg' };
             } else if (title.includes('JPG to PNG')) {
                 pendingSettings = { format: 'image/png' };
-            } else if (title.includes('JPG to WebP')) {
+            } else if (title.includes('JPG to WebP') || title.includes('GIF to WebP')) {
                 pendingSettings = { format: 'image/webp' };
             } else if (title.includes('PNG to AVIF')) {
                 pendingSettings = { format: 'image/avif' };
@@ -470,4 +588,30 @@ if (dropZone) {
             }
         });
     });
+
+// Cookie Consent Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const banner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('accept-cookies');
+
+    if (banner && acceptBtn) {
+        // Show banner if not accepted
+        if (!localStorage.getItem('cookieConsent') && !document.cookie.includes('cookieConsent=true')) {
+            banner.style.display = 'block';
+        }
+
+        acceptBtn.addEventListener('click', () => {
+            // Save consent in LocalStorage
+            localStorage.setItem('cookieConsent', 'true');
+            
+            // Save consent in Cookie with 1 year expiration
+            const now = new Date();
+            now.setFullYear(now.getFullYear() + 1);
+            document.cookie = "cookieConsent=true; expires=" + now.toUTCString() + "; path=/; SameSite=Lax";
+            
+            banner.style.display = 'none'; // Hide banner
+            console.log('Cookies accepted by user.');
+        });
+    }
+});
 

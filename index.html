@@ -1,704 +1,182 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Image Resizer & Converter | PixelResize</title>
-    <meta name="description" content="Resize, compress, and convert JPG, PNG, WebP, AVIF and BMP images instantly with PixelResize. Fast, secure, and free.">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2486732565949048"
-     crossorigin="anonymous"></script>
-    <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="alternate" hreflang="en" href="https://pixelresize.site/" />
-    <link rel="alternate" hreflang="es" href="https://pixelresize.site/es/" />
-    <link rel="alternate" hreflang="fr" href="https://pixelresize.site/fr/" />
-    <link rel="alternate" hreflang="de" href="https://pixelresize.site/de/" />
-    <link rel="alternate" hreflang="x-default" href="https://pixelresize.site/" />
-    <link rel="manifest" href="/site.webmanifest">
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Free Image Resizer & Converter Online (JPG PNG WebP AVIF) | PixelResize</title> <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2486732565949048" crossorigin="anonymous"></script> <meta name="description" content="Resize, compress and convert images instantly with PixelResize. Free browser-based image resizer supporting JPG, PNG, WebP, AVIF and BMP formats."> <!-- Favicons --> <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"> <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"> <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"> <link rel="alternate" hreflang="x-default" href="https://pixelresize.site/" /> <link rel="alternate" hreflang="en" href="https://pixelresize.site/" /> <link rel="manifest" href="/site.webmanifest"> <meta name="keywords" content="online image resizer, resize image online, image compressor, jpg to png converter, png to jpg converter, webp converter, image optimizer, image compression tool, avif converter, bmp resizer"> <link rel="canonical" href="https://pixelresize.site/"> <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"> <!-- Open Graph / Facebook --> <meta property="og:type" content="website"> <meta property="og:url" content="https://pixelresize.site/"> <meta property="og:title" content="Online Image Resizer & Converter | PixelResize"> <meta property="og:description" content="Resize, compress, and convert JPG, PNG, WebP, AVIF and BMP images instantly with PixelResize."> <meta property="og:image" content="https://pixelresize.site/og-image.jpg"> <meta property="og:site_name" content="PixelResize"> <!-- Twitter --> <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https://pixelresize.site/"> <meta property="twitter:title" content="Online Image Resizer & Converter | PixelResize"> <meta property="twitter:description" content="Resize, compress, and convert JPG, PNG, WebP, AVIF and BMP images instantly with PixelResize."> <meta property="twitter:image" content="https://pixelresize.site/og-image.jpg"> <!-- Preconnect --> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link rel="preconnect" href="https://unpkg.com"> <!-- Critical CSS --> <style> :root { --primary: #4F46E5; --primary-hover: #4338CA; --secondary: #6366F1; --background: #F8FAFC; --text-main: #111827; --text-muted: #64748B; --white: #FFFFFF; --border: #E2E8F0; --radius: 16px; } * { margin: 0; padding: 0; box-sizing: border-box; } body { font-family: 'Inter', sans-serif; background-color: var(--background); color: var(--text-main); line-height: 1.6; } .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; } .header { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; height: 72px; display: flex; align-items: center; } @media (max-width: 768px) { .hero { padding: 40px 0; } .hero-header h1 { font-size: 32px; } .ad-top { display: none; } .upload-card { padding: 30px 20px; } } 
 
-    <meta name="keywords" content="online image resizer, resize image online, image compressor, jpg to png converter, png to jpg converter, webp converter, image optimizer, image compression tool, avif converter, bmp resizer">
-    <link rel="canonical" href="https://pixelresize.site/">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+/* Cookie Banner Styles */
+#cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    padding: 20px;
+    box-shadow: 0 -10px 25px rgba(0,0,0,0.05);
+    z-index: 9999;
+    display: none; /* Hidden by default */
+}
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://pixelresize.site/">
-    <meta property="og:title" content="Online Image Resizer & Converter | PixelResize">
-    <meta property="og:description" content="Resize, compress, and convert JPG, PNG, WebP, AVIF and BMP images instantly with PixelResize.">
-    <meta property="og:image" content="https://pixelresize.site/og-image.jpg">
-    <meta property="og:site_name" content="PixelResize">
+.cookie-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://pixelresize.site/">
-    <meta property="twitter:title" content="Online Image Resizer & Converter | PixelResize">
-    <meta property="twitter:description" content="Resize, compress, and convert JPG, PNG, WebP, AVIF and BMP images instantly with PixelResize.">
-    <meta property="twitter:image" content="https://pixelresize.site/og-image.jpg">
+.cookie-text {
+    font-size: 14px;
+    color: #475569;
+    line-height: 1.5;
+}
 
-    <!-- Preloads -->
-    <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="script.js" as="script">
-    
-    <link rel="stylesheet" href="styles.css" media="all">
-    <link rel="stylesheet" href="https://unpkg.com/cropperjs@1.6.2/dist/cropper.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+.cookie-text a {
+    color: #4F46E5;
+    text-decoration: underline;
+}
 
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-     "@context": "https://schema.org",
-     "@graph":[
-    
+.cookie-btn {
+    background: #4F46E5;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+}
+
+.cookie-btn:hover {
+    background: #4338CA;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .cookie-container {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+</style> <!-- BLOG CARD STYLE --> <style> .blog-section{ margin-top:60px; } .tools-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:20px; } @media (max-width: 992px) { .tools-grid { grid-template-columns: repeat(2, 1fr); } } @media (max-width: 576px) { .tools-grid { grid-template-columns: 1fr; } } .tool-card{ display:block; padding:24px; background:#ffffff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08); text-decoration:none; color:#111; transition:all 0.25s ease; } .tool-card:hover{ transform:translateY(-6px); box-shadow:0 10px 24px rgba(0,0,0,0.12); } .tool-card h3{ margin-bottom:10px; font-size:18px; } .tool-card p{ font-size:14px; color:#666; } </style> <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'"> <link rel="stylesheet" href="https://unpkg.com/cropperjs@1.6.2/dist/cropper.min.css" media="print" onload="this.media='all'"> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'"> <noscript> <link rel="stylesheet" href="styles.css"> <link rel="stylesheet" href="https://unpkg.com/cropperjs@1.6.2/dist/cropper.min.css"> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"> </noscript> </head> <body> <input type="file" id="file-input" accept="image/*" style="display: none;" aria-hidden="true"> <header class="header"> <nav class="container nav"> <a href="/" class="logo"> <span class="logo-accent">Pixel</span>Resize </a> <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu"> <span></span> <span></span> <span></span> </button> <ul class="nav-links" id="nav-links"> <li><a href="/" id="home-link">Home</a></li> <li><a href="/about">About</a></li> <li><a href="#popular-tools" id="tools-link">Tools</a></li> <li><a href="#faq">FAQ</a></li> <li><a href="#blog">Blog</a></li> </ul> </nav> </header> <main> <!-- Hero Section --> <section class="hero" aria-labelledby="hero-heading"> <div class="container"> <div class="hero-header"> <h1><span class="hero-title-black">Free Online Image</span> <span class="hero-title-gradient">Resizer & Converter</span></h1> <p class="hero-subtitle">The fastest way to resize, compress, and convert images directly in your browser. 100% private and secure.</p> <div class="trust-badges" aria-label="Trust Indicators"> <span class="badge"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Free Forever</span> <span class="badge"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>Secure Local Processing</span> <span class="badge"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>No Image Storage</span> </div> </div> <div class="ad-container ad-top" style="margin-bottom: 30px; text-align: center;"></div> <div class="hero-grid single-col"> <!-- Upload Area --> <div class="hero-content" id="upload"> <div class="upload-card" id="drop-zone" role="button" aria-label="Upload image area" tabindex="0"> <div class="upload-placeholder" id="upload-placeholder"> <div class="upload-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> </div> <p class="upload-title">Drop your image here</p> <p class="upload-subtitle">or click to upload from your device</p> <button class="btn btn-primary btn-cta" id="select-btn">Select Image</button> </div> <div class="preview-container" id="preview-container" style="display: none;"> <img id="image-preview" src="" alt="Image Preview" loading="lazy"> <button class="btn-remove" id="remove-btn" aria-label="Remove image">&times;</button> </div> </div> </div> <!-- Settings Panel --> <div class="settings-section hidden" id="settings-section"> <div class="settings-card"> <h3>Image Resizer Tool</h3> <div class="control-group"> <label>Dimensions</label> <div class="input-row"> <div class="input-field"> <span>Width (px)</span> <input type="number" id="input-width" placeholder="Width"> </div> <div class="input-field"> <span>Height (px)</span> <input type="number" id="input-height" placeholder="Height"> </div> </div> <div class="checkbox-field"> <input type="checkbox" id="check-aspect" checked> <label for="check-aspect">Maintain Aspect Ratio</label> </div> </div> <div class="control-group"> <label>Format</label> <select id="select-format" class="select-field"> <option value="image/jpeg">JPG</option> <option value="image/png">PNG</option> <option value="image/webp">WEBP</option> <option value="image/avif">AVIF</option> <option value="image/bmp">BMP</option> </select> </div> <div class="control-group"> <div class="label-row"> <label>Quality</label> <span id="quality-label">85%</span> </div> <input type="range" id="input-quality" min="1" max="100" value="85" class="range-field"> <div class="checkbox-field" style="margin-top: 12px;"> <input type="checkbox" id="check-metadata" checked> <label for="check-metadata">Remove EXIF Metadata</label> </div> </div> <div class="control-group"> <label>Transformations</label> <div class="action-grid"> <button class="btn btn-outline" id="rotate-btn" title="Rotate 90° Clockwise">Rotate 90°</button> <button class="btn btn-outline" id="flip-h-btn" title="Flip Horizontal">Flip H</button> <button class="btn btn-outline" id="flip-v-btn" title="Flip Vertical">Flip V</button> <button class="btn btn-outline" id="base64-btn" title="Copy as Base64">Base64</button> </div> </div> <div class="info-panel"> <div class="info-item"> <span>Original Size:</span> <strong id="size-original">0 KB</strong> </div> <div class="info-item"> <span>Estimated Size:</span> <strong id="size-estimated" class="text-primary">0 KB</strong> </div> </div> <div class="action-buttons"> <button class="btn btn-primary btn-full" id="resize-btn">Apply Changes</button> <button class="btn btn-secondary btn-full" id="download-btn" disabled>Download Image</button> <div class="ad-container ad-below-download" style="margin-top: 20px; text-align: center;"></div> </div> </div> </div> </div> </div> </section> <!-- Popular Tools Section --> <section class="container tools-section" id="popular-tools"> <div class="ad-container ad-above-tools" style="margin-bottom: 30px; text-align: center;"></div> <div class="section-header"> <h2>Popular Image Tools</h2> <p>Quick access to our most used image processing tools.</p> </div> <div class="tools-grid"> <article class="tool-card"> <a href="/tools/image-resizer"> <div class="tool-icon">🖼️</div> <h3>Image Resizer</h3> <p>Change image dimensions instantly.</p> </a> </article> <article class="tool-card"> <a href="/tools/image-compressor"> <div class="tool-icon">📉</div> <h3>Image Compressor</h3> <p>Reduce file size without quality loss.</p> </a> </article> <article class="tool-card"> <a href="/tools/jpg-to-png"> <div class="tool-icon">🔄</div> <h3>JPG to PNG</h3> <p>Convert JPG images to PNG format.</p> </a> </article> <article class="tool-card"> <a href="/tools/png-to-jpg"> <div class="tool-icon">♻️</div> <h3>PNG to JPG</h3> <p>Convert PNG images to JPG format.</p> </a> </article> <div class="ad-container ad-between-cards" style="grid-column: 1 / -1; margin: 10px 0;"></div> <article class="tool-card"> <a href="/tools/jpg-to-webp"> <div class="tool-icon">🌐</div> <h3>JPG to WebP</h3> <p>Convert JPG to modern WebP format.</p> </a> </article> <article class="tool-card"> <a href="/tools/gif-to-webp"> <div class="tool-icon">🎞️</div> <h3>GIF to WebP</h3> <p>Convert animated GIFs to optimized WebP.</p> </a> </article> <article class="tool-card"> <a href="/tools/webp-to-jpg"> <div class="tool-icon">⚡</div> <h3>WebP to JPG</h3> <p>Convert WebP back to JPG format.</p> </a> </article> <article class="tool-card"> <a href="/tools/crop-image"> <div class="tool-icon">✂️</div> <h3>Image Crop Tool</h3> <p>Crop your images easily for perfect framing.</p> </a> </article> </div> </section> <div class="adsense-container" style="margin: 30px 0; text-align: center;"> <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2486732565949048" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins> <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script> </div> <div class="adsterra-container" style="max-width:100%; overflow:hidden; text-align:center; margin:20px auto;"> <script> atOptions = { 'key' : 'aa23f60e016806804ed26559dfa19f45', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} }; </script> <script src="https://www.highperformanceformat.com/aa23f60e016806804ed26559dfa19f45/invoke.js"></script> </div> <!-- Content Expansion Section --> <section class="content-expansion container"> <div class="content-grid"> <article class="content-section"> <h2>The Ultimate Guide to Online Image Resizing and Optimization</h2> <p>In today's fast-paced digital world, images are the heartbeat of the internet. From high-resolution photography on e-commerce sites to engaging graphics on social media, visual content drives engagement and communication. However, the very quality that makes images so powerful—their detail and resolution—can also be their greatest weakness. Large, unoptimized images can slow down websites, consume excessive bandwidth, and frustrate users. This is where an <strong>online image resizer</strong> becomes an indispensable tool for creators, developers, and everyday users alike.</p> <p>At PixelResize, we have built a platform that simplifies the complex world of image optimization. Our tools allow you to <strong>resize image online</strong> with precision, ensuring that your visuals are perfectly tailored for their intended platform. Whether you need to fit a specific pixel dimension for a website header or scale down a high-res photo for an email attachment, our browser-based technology provides a fast, secure, and high-quality solution.</p> </article> <article class="content-section"> <h2>Why You Should Resize Image Online with PixelResize</h2> <p>There are many reasons why you might need to adjust the dimensions of an image. Perhaps you're a web developer trying to meet the strict requirements of a responsive design, or a social media manager preparing a post for Instagram, which has very specific aspect ratio requirements. Using a dedicated <strong>online image resizer</strong> like PixelResize offers several advantages over traditional software:</p> <ul> <li><strong>Instant Access:</strong> No need to download or install heavy software like Photoshop. Our tools are available directly in your browser.</li> <li><strong>Privacy First:</strong> Unlike other online converters, PixelResize processes your images locally. Your files are never uploaded to a server, keeping your data 100% private.</li> <li><strong>Speed and Efficiency:</strong> By leveraging your device's local processing power, we eliminate the latency associated with uploading and downloading files from a remote server.</li> <li><strong>Quality Preservation:</strong> Our resampling algorithms are designed to maintain as much detail as possible, ensuring your images remain sharp even after resizing.</li> </ul> </article> <article class="content-section"> <h2>Understanding Image Compression: Speed Up Your Website</h2> <p>While resizing changes the physical dimensions of an image, compression focuses on reducing the file size without necessarily changing the width or height. This is achieved by removing redundant data or using more efficient encoding methods. An <strong>image compressor</strong> is vital for anyone who manages a website or shares large volumes of visual content.</p> <p>When you <strong>compress image online</strong>, you are directly contributing to a better user experience. Faster page load times are not just a convenience; they are a requirement for modern SEO. Google's Core Web Vitals explicitly measure loading performance, and unoptimized images are often the biggest culprit behind slow "Largest Contentful Paint" (LCP) scores. By using PixelResize's compression tools, you can strike the perfect balance between visual fidelity and technical performance.</p> </article> <article class="content-section"> <h2>The Rise of Modern Image Formats: WebP and AVIF</h2> <p>For years, JPEG and PNG were the undisputed kings of the web. However, as web technology has evolved, so have image formats. <strong>WebP</strong>, developed by Google, has become the new standard for web performance. It offers significantly better compression than JPEG for lossy images and better transparency support than PNG for lossless ones. On average, a WebP file can be 30% smaller than a comparable JPEG.</p> <p>Even more advanced is <strong>AVIF</strong>, which provides even higher compression efficiency. At PixelResize, our <strong>webp converter</strong> and AVIF tools allow you to modernize your entire image library in seconds. By transitioning to these next-gen formats, you can drastically reduce your site's total weight, leading to faster load times, reduced hosting costs, and improved search engine rankings.</p> </article> <article class="content-section"> <h2>Image SEO: How to Rank in Google Image Search</h2> <p>Optimizing images for search engines is a multi-faceted process that goes beyond just using a <strong>resizer</strong>. To ensure your images are discoverable and contribute to your site's overall SEO, consider the following best practices:</p> <ul> <li><strong>Descriptive File Names:</strong> Avoid generic names like "image1.jpg". Instead, use keyword-rich names like "best-online-image-resizer.jpg".</li> <li><strong>Alt Text is Crucial:</strong> Alternative text helps search engines understand the content of an image and is essential for accessibility.</li> <li><strong>Responsive Images:</strong> Use the srcset attribute to serve different image sizes to different devices, ensuring mobile users aren't downloading desktop-sized files.</li> <li><strong>Sitemaps:</strong> Include your images in an XML sitemap to help search engines find and index them more efficiently.</li> </ul> <p>By combining these SEO strategies with the technical optimization provided by PixelResize, you can turn your visual assets into powerful drivers of organic traffic.</p> </article> <article class="content-section"> <h2>Browser-Based Processing: The Future of Privacy</h2> <p>In an age of increasing data breaches and privacy concerns, the "Upload-Process-Download" model of many online tools is becoming outdated. When you upload an image to a typical <strong>image converter</strong>, you are giving that service a copy of your file. You have no control over how that file is stored, who can see it, or if it will be deleted.</p> <p>PixelResize takes a different approach. Our tools use modern browser APIs to perform all image manipulations directly on your computer. Your images never leave your device. This "Privacy by Design" architecture makes PixelResize the safest choice for processing sensitive documents, personal photos, or proprietary business assets. We believe that professional-grade tools should respect user privacy by default.</p> </article> <article class="content-section"> <h2>Optimizing Images for Social Media Platforms</h2> <p>Every social media platform has its own set of "ideal" image dimensions. Posting a landscape photo on a platform that prefers vertical content can lead to awkward cropping or low engagement. Using an <strong>online image resizer</strong> allows you to create perfectly sized versions of your content for every channel:</p> <ul> <li><strong>Instagram:</strong> Prefers 1080x1080 for squares and 1080x1350 for portraits.</li> <li><strong>Facebook:</strong> Recommended size for shared images is 1200x630.</li> <li><strong>Twitter (X):</strong> Optimal size for in-stream photos is 1200x675.</li> <li><strong>LinkedIn:</strong> Shared images should be 1200x627.</li> </ul> <p>With PixelResize, you can quickly generate these specific sizes from a single original file, ensuring your brand looks professional across the entire social landscape.</p> </article> <article class="content-section"> <h2>The Importance of Aspect Ratio in Design</h2> <p>When you <strong>resize image online</strong>, maintaining the correct aspect ratio is vital to prevent distortion. An image that has been stretched or squashed looks unprofessional and can ruin the aesthetic of a website or design project. PixelResize's resizer tool includes an "Aspect Ratio Lock" feature by default, ensuring that as you change the width, the height adjusts proportionally (and vice versa).</p> <p>Understanding aspect ratios like 16:9 (widescreen), 4:3 (traditional), and 1:1 (square) helps you make better decisions about how your content will be displayed. Our tool gives you the flexibility to either maintain the original ratio or crop your image to a new one using our integrated <strong>image crop tool</strong>.</p> </article> <article class="content-section"> <h2>How to Reduce Image File Size for Email</h2> <p>Email providers often have strict limits on attachment sizes. Trying to send several high-resolution photos can result in a bounced email or a very slow download for the recipient. Using an <strong>image compressor</strong> before hitting send is a courtesy that everyone appreciates.</p> <p>By compressing your images with PixelResize, you can often reduce a 5MB photo to less than 500KB without any noticeable loss in quality. This makes sharing memories with friends or sending assets to clients much faster and more reliable. It's a simple step that saves time and bandwidth for everyone involved.</p> </article> <article class="content-section"> <h2>Advanced Image Optimization Techniques</h2> <p>For those looking to go beyond basic resizing and compression, there are several advanced techniques to consider. One such method is <strong>metadata removal</strong>. Digital photos often contain EXIF data, which includes information like the camera model, GPS coordinates, and date taken. While useful for photographers, this data can be a privacy risk when sharing images publicly. PixelResize's <strong>metadata remover</strong> allows you to strip this information with a single click.</p> <p>Another technique is <strong>lazy loading</strong>. This is a web development practice where images are only loaded when they are about to enter the user's viewport. This significantly improves initial page load times. When combined with optimized images from PixelResize, lazy loading can make even the most image-heavy pages feel incredibly fast and responsive.</p> </article> <article class="content-section"> <h2>Choosing the Right Format: JPG vs PNG vs WebP</h2> <p>Selecting the correct file format is a fundamental part of image optimization. Each format has its own strengths and weaknesses:</p> <ul> <li><strong>JPG (JPEG):</strong> Best for photographs and complex images with many colors. It uses lossy compression, which allows for very small file sizes but can introduce artifacts at high compression levels.</li> <li><strong>PNG:</strong> Best for graphics, logos, and images that require transparency. It uses lossless compression, meaning no quality is lost, but file sizes are generally larger than JPGs.</li> <li><strong>WebP:</strong> The modern all-rounder. It supports both lossy and lossless compression, transparency, and even animation. It is the best choice for almost all web use cases.</li> </ul> <p>PixelResize's <strong>image converter</strong> allows you to easily switch between these formats, giving you the power to choose the best tool for the job.</p> </article> <article class="content-section"> <h2>The Impact of Images on Core Web Vitals</h2> <p>Google's Core Web Vitals are a set of metrics that measure the "health" of a website's user experience. Images play a major role in two of the three main metrics:</p> <ul> <li><strong>Largest Contentful Paint (LCP):</strong> Measures how long it takes for the largest element on the screen (often an image) to load. Optimized images are key to a fast LCP.</li> <li><strong>Cumulative Layout Shift (CLS):</strong> Measures visual stability. If an image loads without defined dimensions, it can cause the page content to jump around. Always provide width and height attributes for your images.</li> </ul> <p>By using PixelResize to <strong>resize image online</strong> and compress your assets, you are directly improving your site's Core Web Vitals scores, which can lead to better rankings and more satisfied users.</p> </article> <article class="content-section"> <h2>Conclusion: Make PixelResize Your Go-To Image Toolkit</h2> <p>Image optimization doesn't have to be difficult or risky. With PixelResize, you have a suite of professional-grade tools at your fingertips, all running securely in your browser. Whether you're a professional looking to streamline your workflow or a casual user trying to fix a photo, our platform is designed to be fast, free, and easy to use.</p> <p>We are committed to providing the best <strong>online image resizer</strong> and optimization platform on the web. We invite you to explore our tools, read our blog for more tips, and join the thousands of users who trust PixelResize for their image processing needs. Let's build a faster, more beautiful, and more private web together.</p> </article> </div> </section> <section class="container trust-authority"> <h2>Why Use PixelResize?</h2> <div class="benefits-grid"> <div class="benefit-card"> <h3>Privacy First</h3> <p>All image processing happens in your browser. We never see or store your images.</p> </div> <div class="benefit-card"> <h3>Lightning Fast</h3> <p>No upload or download wait times. Get your results instantly using your device's power.</p> </div> <div class="benefit-card"> <h3>High Quality</h3> <p>Advanced algorithms ensure your images stay sharp and clear after resizing or compression.</p> </div> <div class="benefit-card"> <h3>100% Free</h3> <p>No subscriptions, no limits, no hidden fees. Just a powerful tool for everyone.</p> </div> </div> </section> <section class="container formats-section"> <h2>Supported Image Formats</h2> <p>PixelResize is a versatile <strong>online image resizer</strong> and converter that supports a wide range of industry-standard formats.</p> <div class="formats-list"> <div class="format-item"><strong>JPEG (.jpg, .jpeg):</strong> The standard for digital photography.</div> <div class="format-item"><strong>PNG (.png):</strong> Ideal for graphics and transparency.</div> <div class="format-item"><strong>WebP (.webp):</strong> Modern format for the web.</div> <div class="format-item"><strong>AVIF (.avif):</strong> Next-generation format for efficiency.</div> <div class="format-item"><strong>BMP (.bmp):</strong> Lossless format for legacy apps.</div> </div> </section> <!-- Merged FAQ Section --> <div class="ad-container ad-above-footer" style="margin: 30px 0; text-align: center;"></div> <section class="faq-section" id="faq"> <div class="container"> <div class="section-header"> <h2>Image Optimization & Image Tools FAQ</h2> <p>Everything you need to know about resizing, converting, and optimizing images online.</p> </div> <div class="faq-container"> <div class="faq-item"> <h3>How can I resize an image online for free?</h3> <p>You can resize images using our free online image resizer. Upload your JPG, PNG, or WebP image, set your desired dimensions, and download the optimized version instantly.</p> </div> <div class="faq-item"> <h3>Does resizing an image reduce quality?</h3> <p>Image resizing can affect quality if compression is applied. Our tools use smart optimization to maintain the best balance between quality and file size.</p> </div> <div class="faq-item"> <h3>Which image format is best for websites?</h3> <p>WebP and AVIF formats provide the best compression and performance for modern websites while maintaining high image quality.</p> </div> <div class="faq-item"> <h3>Can I convert JPG to PNG or WebP?</h3> <p>Yes. Our image converter allows you to convert JPG, PNG, WebP, AVIF, and BMP images instantly.</p> </div> <div class="faq-item"> <h3>Do your tools work on mobile devices?</h3> <p>Yes. All image tools are mobile-friendly and work directly in your browser without installation.</p> </div> </div> </div> </section> <!-- BLOG SECTION --> <section class="blog-section container" id="blog"> <h2>Image Optimization Guides</h2> <p class="section-subtitle">Learn how to resize, compress and optimize images for better SEO and performance.</p> <div class="blog-grid"> <article class="blog-card"> <svg class="blog-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"> <rect x="8" y="4" width="32" height="40" rx="4" fill="#5C3AC9" /> <path d="M28 36L36 28M36 28H30M36 28V34" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /> <rect x="14" y="12" width="20" height="2" rx="1" fill="white" fill-opacity="0.3" /> <rect x="14" y="18" width="20" height="2" rx="1" fill="white" fill-opacity="0.3" /> <rect x="14" y="24" width="12" height="2" rx="1" fill="white" fill-opacity="0.3" /> </svg> <h3><a href="/blog/how-to-resize-images-online/">How to Resize Images Online</a></h3> <p>A complete guide to resizing images for any platform.</p> <a class="read-more" href="/blog/how-to-resize-images-online/">Read More →</a> </article> <article class="blog-card"> <svg class="blog-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"> <rect x="8" y="4" width="32" height="40" rx="4" fill="#5C3AC9" /> <path d="M28 36L36 28M36 28H30M36 28V34" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /> <rect x="14" y="12" width="20" height="2" rx="1" fill="white" fill-opacity="0.3" /> <rect x="14" y="18" width="20" height="2" rx="1" fill="white" fill-opacity="0.3" /> <rect x="14" y="24" width="12" height="2" rx="1" fill="white" fill-opacity="0.3" /> </svg> <h3><a href="/blog/best-image-format-for-websites/">Best Image Format for Websites</a></h3> <p>WebP vs PNG vs JPG: Which one should you choose?</p> <a class="read-more" href="/blog/best-image-format-for-websites/">Read More →</a> </article> <article class="blog-card"> <svg class="blog-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"> <rect x="8" y="4" width="32" height="40" rx="4" fill="#5C3AC9" /> <path d="M28 36L36 28M36 28H30M36 28V34" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /> <rect x="14" y="12" width="20" height="2" rx="1" fill="white" fill-opacity="0.3" /> <rect x="14" y="18" width="20" height="2" rx="1" fill="white" fill-opacity="0.3" /> <rect x="14" y="24" width="12" height="2" rx="1" fill="white" fill-opacity="0.3" /> </svg> <h3><a href="/blog/seo-image-optimization-guide/">SEO Image Optimization Guide</a></h3> <p>How to rank higher in Google Image Search.</p> <a class="read-more" href="/blog/seo-image-optimization-guide/">Read More →</a> </article> <article class="blog-card"> <svg class="blog-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"> <rect x="8" y="4" width="32" height="40" rx="4" fill="#5C3AC9" /> <path d="M28 36L36 28M36 28H30M36 28V34" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /> <rect x="14" y="12" width="20" height="2" rx="1" fill="white" fill-opacity="0.3" /> <rect x="14" y="18" width="20" height="2" rx="1" fill="white" fill-opacity="0.3" /> <rect x="14" y="24" width="12" height="2" rx="1" fill="white" fill-opacity="0.3" /> </svg> <h3><a href="/blog/best-image-formats-for-animated-content/">Best Image Formats for Animated Content</a></h3> <p>WebP vs GIF: Which is better for animations?</p> <a class="read-more" href="/blog/best-image-formats-for-animated-content/">Read More →</a> </article> </div> </section> </main> <footer class="site-footer"> <div class="container footer-grid"> <!-- BRAND --> <div class="footer-col"> <h3>PixelResize</h3> <p>Free online tools to resize, compress and convert images instantly.</p> </div> <!-- TOOLS --> <div class="footer-col"> <h4>Tools</h4> <ul> <li><a href="/tools/image-resizer">Image Resizer</a></li> <li><a href="/tools/image-compressor">Image Compressor</a></li> <li><a href="/tools/png-to-webp">PNG to WebP</a></li> <li><a href="/tools/image-cropper">Image Crop Tool</a></li> </ul> </div> <!-- BLOG --> <div class="footer-col"> <h4>Guides</h4> <ul> <li><a href="/blog/how-to-resize-images-online/">How to Resize Images</a></li> <li><a href="/blog/best-image-format-for-websites/">Best Image Format</a></li> <li><a href="/blog/seo-image-optimization-guide/">SEO Guide</a></li> <li><a href="/blog/best-image-formats-for-animated-content/">Animated Formats</a></li> </ul> </div> <!-- LEGAL --> <div class="footer-col"> <h4>Legal</h4> <ul> <li><a href="/privacy.html">Privacy Policy</a></li> <li><a href="/terms.html">Terms & Conditions</a></li> <li><a href="/contact.html">Contact</a></li> </ul> </div> </div> <div class="footer-bottom"> <p>© 2026 PixelResize. All rights reserved.</p> <p style="color: #ffffff; margin-top: 10px; font-size: 13px; opacity: 0.9;">Quick Privacy Notice: PixelResize is 100% online. Your images are processed directly in your browser, never uploaded, stored, or viewed by us. All operations happen locally on your device for complete privacy and security.</p> </div> </footer> <!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PixelResize",
+    "operatingSystem": "All",
+    "applicationCategory": "MultimediaApplication",
+    "url": "https://pixelresize.site/",
+    "description": "Free browser-based image resizer and converter. Privacy-first tool to resize, compress, and convert JPG, PNG, WebP, AVIF, and BMP images locally.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "1250"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
       {
-       "@type":"Organization",
-       "name":"PixelResize",
-       "url":"https://pixelresize.site/",
-       "logo":"https://pixelresize.site/logo.png"
-      },
-    
-      {
-        "@type": "WebSite",
-        "url": "https://pixelresize.site/",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://pixelresize.site/?q={search_term_string}",
-          "query-input": "required name=search_term_string"
+        "@type": "Question",
+        "name": "How can I resize an image online for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can resize images using our free online image resizer. Upload your JPG, PNG, or WebP image, set your desired dimensions, and download the optimized version instantly."
         }
       },
-    
       {
-       "@type":"WebApplication",
-       "name":"PixelResize Image Tools",
-       "url":"https://pixelresize.site/",
-       "description":"Fast free online image resizer, compressor and converter supporting JPG, PNG, WebP, AVIF and BMP.",
-       "applicationCategory":"MultimediaApplication",
-       "operatingSystem":"All",
-       "offers":{
-        "@type":"Offer",
-        "price":"0",
-        "priceCurrency":"USD"
-       }
-      },
-    
-      {
-       "@type":"SoftwareApplication",
-       "name":"PixelResize",
-       "operatingSystem":"All",
-       "applicationCategory":"DesignApplication",
-       "offers":{
-        "@type":"Offer",
-        "price":"0",
-        "priceCurrency":"USD"
-       }
-      },
-    
-      {
-       "@type":"BreadcrumbList",
-       "itemListElement":[
-        {
-         "@type":"ListItem",
-         "position":1,
-         "name":"Home",
-         "item":"https://pixelresize.site/"
+        "@type": "Question",
+        "name": "Does resizing an image reduce quality?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Image resizing can affect quality if compression is applied. Our tools use smart optimization to maintain the best balance between quality and file size."
         }
-       ]
       },
-    
       {
-       "@type":"HowTo",
-       "name":"How to Resize an Image Online",
-       "description":"Follow these steps to resize images online using PixelResize.",
-       "step":[
-        {
-         "@type":"HowToStep",
-         "name":"Upload Image",
-         "text":"Upload or drag your image into PixelResize.",
-         "url":"https://pixelresize.site/#upload"
-        },
-        {
-         "@type":"HowToStep",
-         "name":"Adjust Size",
-         "text":"Set the width or height and keep aspect ratio if needed.",
-         "url":"https://pixelresize.site/#settings"
-        },
-        {
-         "@type":"HowToStep",
-         "name":"Download Image",
-         "text":"Click download to save your resized image.",
-         "url":"https://pixelresize.site/#download"
+        "@type": "Question",
+        "name": "Which image format is best for websites?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "WebP and AVIF formats provide the best compression and performance for modern websites while maintaining high image quality."
         }
-       ]
       },
-    
       {
-       "@type":"FAQPage",
-       "mainEntity":[
-    
-        {
-         "@type":"Question",
-         "name":"Is this online image resizer free to use?",
-         "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"Yes, PixelResize is completely free. You can resize, compress and convert unlimited images."
-         }
-        },
-    
-        {
-         "@type":"Question",
-         "name":"Is it safe to upload my images to PixelResize?",
-         "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"Yes. All image processing happens locally in your browser so your files never leave your device."
-         }
-        },
-    
-        {
-         "@type":"Question",
-         "name":"What image formats are supported?",
-         "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"PixelResize supports JPG, PNG, WebP, AVIF and BMP image formats."
-         }
-        },
-    
-        {
-         "@type":"Question",
-         "name":"Can I reduce image size without losing quality?",
-         "acceptedAnswer":{
-          "@type":"Answer",
-          "text":"Yes. Our smart compression reduces file size while maintaining excellent visual quality."
-         }
+        "@type": "Question",
+        "name": "Can I convert JPG to PNG or WebP?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Our image converter allows you to convert JPG, PNG, WebP, AVIF, and BMP images instantly."
         }
-    
-       ]
+      },
+      {
+        "@type": "Question",
+        "name": "Do your tools work on mobile devices?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. All image tools are mobile-friendly and work directly in your browser without installation."
+        }
       }
-    
-     ]
-    }
-    </script>
-</head>
-<body>
-    <input type="file" id="file-input" accept="image/*" style="display: none;" aria-hidden="true">
-    <header class="header">
-        <nav class="container nav">
-            <a href="/" class="logo">
-                <span class="logo-accent">Pixel</span>Resize
-            </a>
-            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="/" id="home-link">Home</a></li>
-                <li><a href="#popular-tools" id="tools-link">Tools</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="#blog">Blog</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <!-- Hero Section -->
-        <section class="hero" aria-labelledby="hero-heading">
-            <div class="container">
-                <div class="hero-header">
-                    <h1 id="hero-heading">Online Image Resizer & Converter Tool</h1>
-                    <p class="hero-subtitle">Resize, compress, and convert images instantly without losing quality.</p>
-                    <div class="trust-badges" aria-label="Trust Indicators">
-                        <span class="badge">Free Tool</span>
-                        <span class="badge">Secure Browser Processing</span>
-                        <span class="badge">No Image Storage</span>
-                        <span class="badge">Works on All Devices</span>
-                    </div>
-                </div>
-                
-                <div class="hero-grid single-col">
-                    <!-- Upload Area -->
-                    <div class="hero-content" id="upload">
-                        <div class="upload-card" id="drop-zone" role="button" aria-label="Upload image area" tabindex="0">
-                            <div class="upload-placeholder" id="upload-placeholder">
-                                <div class="upload-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                </div>
-                                <p class="upload-title">Drop your image here</p>
-                                <p class="upload-subtitle">or click to upload from your device</p>
-                                <button class="btn btn-primary btn-cta" id="select-btn">Select Image</button>
-                            </div>
-                            <div class="preview-container" id="preview-container" style="display: none;">
-                                <img id="image-preview" src="" alt="Preview">
-                                <button class="btn-remove" id="remove-btn" aria-label="Remove image">&times;</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Settings Panel -->
-                    <div class="settings-section hidden" id="settings-section">
-                        <div class="settings-card">
-                            <h3>Image Resizer Tool</h3>
-                            
-                            <div class="control-group">
-                                <label>Dimensions</label>
-                                <div class="input-row">
-                                    <div class="input-field">
-                                        <span>Width (px)</span>
-                                        <input type="number" id="input-width" placeholder="Width">
-                                    </div>
-                                    <div class="input-field">
-                                        <span>Height (px)</span>
-                                        <input type="number" id="input-height" placeholder="Height">
-                                    </div>
-                                </div>
-                                <div class="checkbox-field">
-                                    <input type="checkbox" id="check-aspect" checked>
-                                    <label for="check-aspect">Maintain Aspect Ratio</label>
-                                </div>
-                            </div>
-
-                            <div class="control-group">
-                                <label>Format</label>
-                                <select id="select-format" class="select-field">
-                                    <option value="image/jpeg">JPG</option>
-                                    <option value="image/png">PNG</option>
-                                    <option value="image/webp">WEBP</option>
-                                    <option value="image/avif">AVIF</option>
-                                    <option value="image/bmp">BMP</option>
-                                </select>
-                            </div>
-
-                            <div class="control-group">
-                                <div class="label-row">
-                                    <label>Quality</label>
-                                    <span id="quality-label">85%</span>
-                                </div>
-                                <input type="range" id="input-quality" min="1" max="100" value="85" class="range-field">
-                            </div>
-
-                            <div class="info-panel">
-                                <div class="info-item">
-                                    <span>Original Size:</span>
-                                    <strong id="size-original">0 KB</strong>
-                                </div>
-                                <div class="info-item">
-                                    <span>Estimated Size:</span>
-                                    <strong id="size-estimated" class="text-primary">0 KB</strong>
-                                </div>
-                            </div>
-
-                            <div class="action-buttons">
-                                <button class="btn btn-primary btn-full" id="resize-btn">Apply Changes</button>
-                                <button class="btn btn-secondary btn-full" id="download-btn" disabled>Download Image</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Popular Tools Section -->
-        <section class="container tools-section" id="popular-tools">
-            <div class="section-header">
-                <h2>Popular Image Tools</h2>
-                <p>Quick access to our most used image processing tools.</p>
-            </div>
-            <div class="tools-grid">
-                <article class="tool-card">
-                    <a href="#upload">
-                        <div class="tool-icon">🖼️</div>
-                        <h3>Image Resizer</h3>
-                        <p>Change image dimensions instantly.</p>
-                    </a>
-                </article>
-                <article class="tool-card">
-                    <a href="#upload">
-                        <div class="tool-icon">📉</div>
-                        <h3>Image Compressor</h3>
-                        <p>Reduce file size without quality loss.</p>
-                    </a>
-                </article>
-                <article class="tool-card">
-                    <a href="#upload">
-                        <div class="tool-icon">🔄</div>
-                        <h3>JPG to PNG</h3>
-                        <p>Convert JPG images to PNG format.</p>
-                    </a>
-                </article>
-                <article class="tool-card">
-                    <a href="#upload">
-                        <div class="tool-icon">♻️</div>
-                        <h3>PNG to JPG</h3>
-                        <p>Convert PNG images to JPG format.</p>
-                    </a>
-                </article>
-                <article class="tool-card">
-                    <a href="#upload">
-                        <div class="tool-icon">🌐</div>
-                        <h3>JPG to WebP</h3>
-                        <p>Convert JPG to modern WebP format.</p>
-                    </a>
-                </article>
-                <article class="tool-card">
-                    <a href="#upload">
-                        <div class="tool-icon">⚡</div>
-                        <h3>WebP to JPG</h3>
-                        <p>Convert WebP back to JPG format.</p>
-                    </a>
-                </article>
-                <article class="tool-card">
-                    <a href="#upload">
-                        <div class="tool-icon">✂️</div>
-                        <h3>Image Crop Tool</h3>
-                        <p>Coming Soon: Crop your images easily.</p>
-                    </a>
-                </article>
-                <article class="tool-card">
-                    <a href="#upload">
-                        <div class="tool-icon">🧹</div>
-                        <h3>Metadata Remover</h3>
-                        <p>Coming Soon: Strip EXIF data from photos.</p>
-                    </a>
-                </article>
-            </div>
-        </section>
-
-        <!-- Native Ad Placement -->
-        <div class="ad-native container" style="margin: 40px auto;">
-            <script async="async" data-cfasync="false" src="https://pl28867158.effectivegatecpm.com/6b52f0494826d3ea2698e94ef769e2c1/invoke.js"></script>
-            <div id="container-6b52f0494826d3ea2698e94ef769e2c1"></div>
-        </div>
-
-        <!-- Content Expansion Section -->
-        <section class="content-expansion container">
-            <div class="content-grid">
-                <article class="content-section">
-                    <h2>How Online Image Resizing Works</h2>
-                    <p>When you use an <strong>online image resizer</strong>, the tool adjusts the pixel dimensions of your digital image. This process involves resampling, where the software calculates new pixel values based on the existing ones. PixelResize uses advanced client-side algorithms to ensure that when you <strong>resize image online</strong>, the clarity and sharpness are preserved as much as possible.</p>
-                    <p>Our tool performs these calculations directly in your browser using JavaScript and Canvas APIs. This means the heavy lifting is done by your device, resulting in near-instantaneous results. Whether you are scaling down for a profile picture or adjusting dimensions for a blog post, the process is seamless and efficient. By avoiding server-side processing, we eliminate latency and provide a much smoother user experience.</p>
-                </article>
-
-                <article class="content-section">
-                    <h2>Why Image Compression Improves Website Speed</h2>
-                    <p>Website performance is a critical factor for both user experience and search engine optimization. Large, unoptimized images are one of the primary causes of slow page load times. By using an <strong>image compressor</strong>, you can significantly reduce the file size of your assets without a noticeable drop in visual quality.</p>
-                    <p>Faster websites lead to lower bounce rates and higher conversion rates. Search engines like Google also use page speed as a ranking signal, specifically through Core Web Vitals. Therefore, to <strong>compress image online</strong> before uploading it to your site is not just a good practice—it's essential for digital success.</p>
-                </article>
-
-                <!-- Banner Ad Positioned Above WebP Section -->
-                <div class="container ad-banner" style="margin: 40px auto; text-align: center;">
-                    <script type="text/javascript">
-                        atOptions = {
-                            'key' : 'aa23f60e016806804ed26559dfa19f45',
-                            'format' : 'iframe',
-                            'height' : 90,
-                            'width' : 728,
-                            'params' : {}
-                        };
-                    </script>
-                    <script type="text/javascript" src="https://www.highperformanceformat.com/aa23f60e016806804ed26559dfa19f45/invoke.js"></script>
-                </div>
-
-                <article class="content-section">
-                    <h2>Benefits of WebP Images for Modern Web</h2>
-                    <p>Modern image formats like WebP and AVIF offer superior compression compared to traditional formats like JPEG and PNG. WebP provides lossless and lossy compression for images on the web, often resulting in file sizes that are 25-35% smaller than JPEGs of similar quality. This makes it the preferred choice for modern web development.</p>
-                    <p>AVIF goes even further, offering even better efficiency and quality. Using a <strong>webp converter</strong> to transition your library to these next-gen formats can drastically improve your site's Core Web Vitals. PixelResize makes it easy to convert your existing images to these high-performance formats in seconds.</p>
-                </article>
-
-                <article class="content-section">
-                    <h2>How to Optimize Images for SEO</h2>
-                    <p>SEO for images involves more than just resizing. To truly optimize your visual content and drive organic traffic, you should follow these essential steps:</p>
-                    <ul>
-                        <li><strong>Use Descriptive File Names:</strong> Instead of "IMG_1234.jpg", use descriptive keywords like "online-image-resizer-tool.jpg".</li>
-                        <li><strong>Optimize Dimensions:</strong> Always <strong>resize image online</strong> to the exact dimensions required by your layout.</li>
-                        <li><strong>Compress for Speed:</strong> Use an <strong>image optimizer</strong> to keep file sizes under 100KB whenever possible.</li>
-                        <li><strong>Leverage Alt Text:</strong> Provide meaningful alternative text for accessibility and SEO.</li>
-                    </ul>
-                </article>
-
-                <article class="content-section">
-                    <h2>Browser-Based Image Processing Privacy</h2>
-                    <p>One of the unique features of PixelResize is our commitment to privacy. Most online tools require you to upload your files to a remote server, where they are processed and stored. This can pose a significant security risk.</p>
-                    <p>PixelResize operates entirely within your web browser. When you <strong>resize image online</strong> with us, your data never leaves your computer. We use local processing power to handle all tasks, ensuring that your privacy is 100% protected. No uploads, no storage, no risk.</p>
-                </article>
-            </div>
-        </section>
-
-        <section class="container trust-authority">
-            <h2>Why Use PixelResize?</h2>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <h3>Privacy First</h3>
-                    <p>All image processing happens in your browser. We never see or store your images.</p>
-                </div>
-                <div class="benefit-card">
-                    <h3>Lightning Fast</h3>
-                    <p>No upload or download wait times. Get your results instantly using your device's power.</p>
-                </div>
-                <div class="benefit-card">
-                    <h3>High Quality</h3>
-                    <p>Advanced algorithms ensure your images stay sharp and clear after resizing or compression.</p>
-                </div>
-                <div class="benefit-card">
-                    <h3>100% Free</h3>
-                    <p>No subscriptions, no limits, no hidden fees. Just a powerful tool for everyone.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="container formats-section">
-            <h2>Supported Image Formats</h2>
-            <p>PixelResize is a versatile <strong>online image resizer</strong> and converter that supports a wide range of industry-standard formats.</p>
-            <div class="formats-list">
-                <div class="format-item"><strong>JPEG (.jpg, .jpeg):</strong> The standard for digital photography.</div>
-                <div class="format-item"><strong>PNG (.png):</strong> Ideal for graphics and transparency.</div>
-                <div class="format-item"><strong>WebP (.webp):</strong> Modern format for the web.</div>
-                <div class="format-item"><strong>AVIF (.avif):</strong> Next-generation format for efficiency.</div>
-                <div class="format-item"><strong>BMP (.bmp):</strong> Lossless format for legacy apps.</div>
-            </div>
-        </section>
-
-        <!-- FAQ Section -->
-        <section class="container faq-section" id="faq">
-            <div class="section-header">
-                <h2>Frequently Asked Questions</h2>
-                <p>Common questions about our online image tools.</p>
-            </div>
-            <div class="faq-grid">
-                <article class="faq-item">
-                    <h3>Is this online image resizer free to use?</h3>
-                    <p>Yes, PixelResize is a 100% free <strong>online image resizer</strong>. You can resize, compress, and convert as many images as you like without any hidden costs.</p>
-                </article>
-                <article class="faq-item">
-                    <h3>Is it safe to upload my images to PixelResize?</h3>
-                    <p>Absolutely. All processing happens locally in your browser. Your images never leave your device, ensuring total privacy and security.</p>
-                </article>
-                <article class="faq-item">
-                    <h3>What image formats are supported?</h3>
-                    <p>Our <strong>image converter</strong> supports all popular formats including JPG, PNG, WebP, AVIF, and BMP.</p>
-                </article>
-                <article class="faq-item">
-                    <h3>Will I lose quality when I resize my image?</h3>
-                    <p>PixelResize uses high-quality resampling algorithms to minimize quality loss. Scaling down is generally very clean.</p>
-                </article>
-            </div>
-        </section>
-
-        <!-- Blog Section -->
-        <section class="container blog-section" id="blog">
-            <div class="section-header">
-                <h2>Latest from Our Blog</h2>
-                <p>Learn more about image optimization and web performance.</p>
-            </div>
-            <div class="tools-grid">
-                <article class="tool-card">
-                    <a href="/blog/how-to-resize-images-online">
-                        <h3>How to Resize Images Online</h3>
-                        <p>A complete guide to resizing images for any platform.</p>
-                    </a>
-                </article>
-                <article class="tool-card">
-                    <a href="/blog/best-image-format-for-websites">
-                        <h3>Best Image Format for Websites</h3>
-                        <p>WebP vs PNG vs JPG: Which one should you choose?</p>
-                    </a>
-                </article>
-                <article class="tool-card">
-                    <a href="/blog/seo-image-optimization-guide">
-                        <h3>SEO Image Optimization Guide</h3>
-                        <p>How to rank higher in Google Image Search.</p>
-                    </a>
-                </article>
-            </div>
-        </section>
-    </main>
-    </main>
-
-        <!-- SEO FAQ Section -->
-        <section class="container seo-faq-section">
-            <div class="section-header">
-                <h2>Image Optimization FAQ</h2>
-                <p>Common questions about resizing, compressing, and converting images online.</p>
-            </div>
-            <div class="faq-grid">
-                <article class="faq-item">
-                    <h3>How can I resize an image online?</h3>
-                    <p>To resize an image online, simply upload your file to PixelResize, specify your target width or height, and click 'Apply Changes'. Our tool processes the image directly in your browser for maximum speed and privacy.</p>
-                </article>
-                <article class="faq-item">
-                    <h3>Is PixelResize free to use?</h3>
-                    <p>Yes, PixelResize is 100% free. We provide professional-grade image tools including resizers, compressors, and converters without any subscription fees or hidden costs.</p>
-                </article>
-                <article class="faq-item">
-                    <h3>What image formats are supported?</h3>
-                    <p>PixelResize supports all major image formats including JPG, PNG, WebP, AVIF, and BMP. You can easily convert between these formats while maintaining high quality.</p>
-                </article>
-                <article class="faq-item">
-                    <h3>Does PixelResize store my uploaded images?</h3>
-                    <p>No. PixelResize uses client-side processing, meaning your images are processed entirely within your web browser. Your files are never uploaded to our servers, ensuring total privacy.</p>
-                </article>
-                <article class="faq-item">
-                    <h3>Can I reduce image size without losing quality?</h3>
-                    <p>Yes. Our image compressor uses intelligent algorithms to remove unnecessary data from your images, significantly reducing file size while keeping the visual quality virtually identical to the original.</p>
-                </article>
-            </div>
-        </section>
-
-    <footer class="footer">
-        <div class="container footer-grid">
-            <div class="footer-info">
-                <div class="footer-logo">PixelResize</div>
-                <p>Professional-grade online image tools for everyone. Fast, secure, and free. All processing happens in your browser.</p>
-                <div class="smart-links" style="margin-top: 20px;">
-                    <!-- Smart Links -->
-                    <a href="https://www.highperformanceformat.com/aa23f60e016806804ed26559dfa19f45/invoke.js" style="font-size: 12px; color: #64748B;">Optimized Image Processing</a>
-                </div>
-            </div>
-            <div class="footer-links">
-                <h4>Image Tools</h4>
-                <ul>
-                    <li><a href="/image-resizer">Image Resizer</a></li>
-                    <li><a href="/image-compressor">Image Compressor</a></li>
-                    <li><a href="/crop-image">Image Crop Tool</a></li>
-                    <li><a href="/remove-metadata">Metadata Remover</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Image Converters</h4>
-                <ul>
-                    <li><a href="/jpg-to-png">JPG to PNG</a></li>
-                    <li><a href="/png-to-jpg">PNG to JPG</a></li>
-                    <li><a href="/webp-to-jpg">WebP to JPG</a></li>
-                    <li><a href="/jpg-to-webp">JPG to WebP</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Resources</h4>
-                <ul>
-                    <li><a href="/blog/how-to-resize-images-online">How to Resize</a></li>
-                    <li><a href="/blog/seo-image-optimization-guide">SEO Guide</a></li>
-                    <li><a href="#privacy">Privacy Policy</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 PixelResize.site - All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "PixelResize - Online Image Resizer & Converter",
-      "url": "https://pixelresize.site/",
-      "description": "Free online image resizer and converter tool. Resize, compress, and convert JPG, PNG, WebP, AVIF, and BMP images directly in your browser.",
-      "applicationCategory": "MultimediaApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "featureList": [
-        "Image Resizing",
-        "Image Compression",
-        "Format Conversion",
-        "Metadata Removal",
-        "Image Cropping"
-      ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Is this online image resizer free to use?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, PixelResize is a 100% free online image resizer. You can resize, compress, and convert as many images as you like without any hidden costs."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is it safe to upload my images to PixelResize?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Absolutely. All processing happens locally in your browser. Your images never leave your device, ensuring total privacy and security."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What image formats are supported?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Our image converter supports all popular formats including JPG, PNG, WebP, AVIF, and BMP."
-          }
-        }
-      ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": "How to Resize an Image Online",
-      "description": "Follow these simple steps to resize your images online for free using PixelResize.",
-      "step": [
-        {
-          "@type": "HowToStep",
-          "name": "Upload Image",
-          "text": "Drag and drop your image or click to select a file from your device.",
-          "url": "https://pixelresize.site/#upload"
-        },
-        {
-          "@type": "HowToStep",
-          "name": "Adjust Settings",
-          "text": "Enter your desired width and height, or choose a percentage to resize.",
-          "url": "https://pixelresize.site/#settings"
-        },
-        {
-          "@type": "HowToStep",
-          "name": "Download Image",
-          "text": "Click the download button to save your optimized image to your device.",
-          "url": "https://pixelresize.site/#download"
-        }
-      ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [{
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
         "item": "https://pixelresize.site/"
-      }]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "PixelResize",
-      "operatingSystem": "All",
-      "applicationCategory": "DesignApplication",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
       }
-    }
-    </script>
-    <script type="module" src="script.js"></script>
-</body>
-</html>
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Resize an Image Online",
+    "description": "Follow these simple steps to resize and optimize your images using PixelResize.",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Upload Image",
+        "text": "Click the 'Select Image' button or drag and drop your file into the upload area.",
+        "url": "https://pixelresize.site/#upload"
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Set Dimensions",
+        "text": "Enter your desired width and height in pixels. You can lock the aspect ratio to prevent distortion.",
+        "url": "https://pixelresize.site/#settings"
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Choose Format & Quality",
+        "text": "Select your output format (JPG, PNG, WebP, or AVIF) and adjust the quality slider.",
+        "url": "https://pixelresize.site/#settings"
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Download",
+        "text": "Click 'Apply Changes' and then 'Download Image' to save your optimized file.",
+        "url": "https://pixelresize.site/#settings"
+      }
+    ]
+  }
+]
+</script>
+<!-- UNIVERSAL CLICK FIX --> <script> document.addEventListener("click", function(e){ /* Allow normal link behavior */ if(e.target.closest("a")){ return; } /* Handle tool cards only */ const card = e.target.closest(".tool-card"); if(card && card.dataset.tool){ const fileInput = document.getElementById("file-input"); if(fileInput){ fileInput.click(); } } }); </script> <!-- CROP TOOL + POPUNDER COMPLETE SCRIPT --> <script src="https://unpkg.com/cropperjs@1.6.2/dist/cropper.min.js"></script> <script> let cropper = null; let cropMode = false; let popClicks = 0; let nextPop = Math.floor(Math.random()*2)+3; const fileInput = document.getElementById("file-input"); const imagePreview = document.getElementById("image-preview"); const resizeBtn = document.getElementById("resize-btn"); /* ============================== DETECT CROP TOOL CARD CLICK ================================ */ document.addEventListener("click",function(e){ const card = e.target.closest(".tool-card"); if(!card) return; const title = card.querySelector("h3"); if(!title) return; if(title.innerText.toLowerCase().includes("crop")){ e.preventDefault(); cropMode = true; document.getElementById("upload") .scrollIntoView({behavior:"smooth"}); setTimeout(()=>{ fileInput.click(); },400); } }); /* ============================== IMAGE UPLOAD ================================ */ fileInput.addEventListener("change",function(){ const file = this.files[0]; if(!file) return; const reader = new FileReader(); reader.onload=function(e){ imagePreview.src = e.target.result; setTimeout(()=>{ if(cropMode){ if(cropper){ cropper.destroy(); } cropper = new Cropper(imagePreview,{ viewMode:1, autoCropArea:1, responsive:true, movable:true, zoomable:true, scalable:true, background:false }); } },200); }; reader.readAsDataURL(file); }); /* ============================== APPLY CHANGES BUTTON ================================ */ resizeBtn.addEventListener("click",function(){ /* POPUNDER LOGIC */ popClicks++; if(popClicks === 1 || popClicks >= nextPop){ var s=document.createElement("script"); s.src="https://pl28867158.effectivegatecpm.com/6b52f0494826d3ea2698e94ef769e2c1/invoke.js"; document.body.appendChild(s); popClicks=0; nextPop=Math.floor(Math.random()*2)+3; } /* CROP FUNCTION */ if(!cropMode || !cropper) return; const canvas = cropper.getCroppedCanvas({ imageSmoothingQuality:"high" }); const cropped = canvas.toDataURL("image/png"); imagePreview.src = cropped; cropper.destroy(); cropper = null; cropMode = false; }); /* ============================== REMOVE IMAGE RESET ================================ */ const removeBtn=document.getElementById("remove-btn"); if(removeBtn){ removeBtn.addEventListener("click",function(){ if(cropper){ cropper.destroy(); cropper=null; } cropMode=false; }); } </script> <div id="cookie-banner">
+    <div class="cookie-container">
+        <p class="cookie-text">
+            We use cookies to improve your experience and analyze our traffic. By clicking "Accept", you consent to our use of cookies for ads and analytics. Read our <a href="/privacy.html">Privacy Policy</a>.
+        </p>
+        <button class="cookie-btn" id="accept-cookies">Accept All</button>
+    </div>
+</div>
+<script type="module" src="script.js" defer></script> </body> </html>
