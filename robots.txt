@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
+# Block search/query URLs
+Disallow: /*?q=
+Disallow: /*?search=
+Disallow: /*?filter=
+
+# Sitemap
 Sitemap: https://pixelresize.site/sitemap.xml
