@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free Online Image Cropper - Crop Images Instantly | PixelResize</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2486732565949048"
-crossorigin="anonymous"></script>
     <meta name="description" content="Crop images online for free with PixelResize. Easy-to-use tool to crop photos to any aspect ratio. No upload required, 100% private.">
     <link rel="canonical" href="https://pixelresize.site/tools/crop-image">
     
@@ -33,9 +31,34 @@ crossorigin="anonymous"></script>
         .hero-title-gradient { background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .hero-subtitle { font-size: 1.25rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 32px; }
 
-        .footer { background: var(--white); border-top: 1px solid var(--border); padding: 40px 0; text-align: center; margin-top: 60px; }
-        .footer p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px; }
-        .footer a { color: var(--primary); text-decoration: none; }
+        .aspect-ratio-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 8px; }
+        .aspect-ratio-grid .btn { padding: 8px; font-size: 0.85rem; }
+        .aspect-ratio-grid .btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .btn-full { width: 100%; margin-top: 12px; }
+        .action-buttons { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+        .hidden { display: none; }
+        .hero-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 350px; gap: 40px; text-align: left; }
+        .hero-grid.single-col { grid-template-columns: 1fr; max-width: 800px; }
+        .upload-card { background: var(--white); border: 2px dashed var(--border); border-radius: var(--radius); padding: 60px 40px; cursor: pointer; transition: all 0.2s; position: relative; min-height: 400px; display: flex; align-items: center; justify-content: center; }
+        .upload-card:hover { border-color: var(--primary); background: rgba(79, 70, 229, 0.02); }
+        .upload-placeholder { text-align: center; }
+        .upload-icon { color: var(--primary); margin-bottom: 20px; }
+        .upload-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+        .upload-subtitle { color: var(--text-muted); margin-bottom: 24px; }
+        .btn { padding: 12px 24px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: 1px solid transparent; font-size: 1rem; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-hover); }
+        .btn-outline { background: white; border-color: var(--border); color: var(--text-main); }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+        .preview-container { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+        .preview-container img { max-width: 100%; max-height: 500px; border-radius: 8px; }
+        .btn-remove { position: absolute; top: -15px; right: -15px; width: 32px; height: 32px; background: #EF4444; color: white; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 10; }
+        .settings-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; position: sticky; top: 100px; }
+        .settings-card h3 { margin-bottom: 20px; font-size: 1.25rem; }
+        .control-group { margin-bottom: 20px; }
+        .control-group label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .select-field { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--background); font-size: 1rem; cursor: pointer; }
+        .error-message { background: #FEE2E2; color: #B91C1C; padding: 12px; border-radius: 8px; margin-top: 20px; font-size: 0.875rem; border: 1px solid #FCA5A5; }
     </style>
 
     <link rel="stylesheet" href="../../styles.css" media="print" onload="this.media='all'">
@@ -59,8 +82,6 @@ crossorigin="anonymous"></script>
             <div class="container">
                 <h1><span class="hero-title-black">Free Online</span> <span class="hero-title-gradient">Image Cropper</span></h1>
                 <p class="hero-subtitle">Crop your images to any size or aspect ratio instantly. Perfect for social media, profile pictures, and more. Fast, free, and secure.</p>
-                
-                <div class="ad-container ad-top" style="margin-bottom: 30px; text-align: center;"></div>
 
                 <div class="hero-grid single-col">
                     <!-- Upload Area -->
@@ -108,8 +129,9 @@ crossorigin="anonymous"></script>
                             <div class="action-buttons">
                                 <button class="btn btn-primary btn-full" id="resize-btn">Crop Image</button>
                                 <button class="btn btn-secondary btn-full" id="download-btn" disabled>Download Cropped Image</button>
-                                <div class="ad-container ad-below-download" style="margin-top: 20px; text-align: center;"></div>
+                                <button class="btn btn-outline btn-full" id="base64-btn" disabled>Copy as Base64</button>
                             </div>
+                            <div id="error-message" class="error-message hidden"></div>
                         </div>
                     </div>
                 </div>
@@ -136,48 +158,71 @@ crossorigin="anonymous"></script>
             </ul>
     </main>
 
-<footer class="site-footer">
-<div class="container footer-grid">
-<!-- BRAND -->
-<div class="footer-col">
-<h3>PixelResize</h3>
-<p>Free online tools to resize, compress and convert images instantly.</p>
-</div>
-<!-- TOOLS -->
-<div class="footer-col">
-<h4>Tools</h4>
-<ul>
-<li><a href="/tools/image-resizer">Image Resizer</a></li>
-<li><a href="/tools/image-compressor">Image Compressor</a></li>
-<li><a href="/tools/png-to-webp">PNG to WebP</a></li>
-<li><a href="/tools/image-cropper">Image Crop Tool</a></li>
-</ul>
-</div>
-<!-- BLOG -->
-<div class="footer-col">
-<h4>Guides</h4>
-<ul>
-<li><a href="/blog/how-to-resize-images-online/">How to Resize Images</a></li>
-<li><a href="/blog/best-image-format-for-websites/">Best Image Format</a></li>
-<li><a href="/blog/seo-image-optimization-guide/">SEO Guide</a></li>
-<li><a href="/blog/best-image-formats-for-animated-content/">Animated Formats</a></li>
-</ul>
-</div>
-<!-- LEGAL -->
-<div class="footer-col">
-<h4>Legal</h4>
-<ul>
-<li><a href="/privacy.html">Privacy Policy</a></li>
-<li><a href="/terms.html">Terms & Conditions</a></li>
-<li><a href="/contact.html">Contact</a></li>
-</ul>
-</div>
-</div>
-<div class="footer-bottom">
-<p>© 2026 PixelResize. All rights reserved.</p>
-</div>
-</footer>
+<footer class="footer">
+  <div class="footer-container">
 
-    <script type="module" src="../../script.js" defer></script>
+    <!-- COLUMN 1 -->
+    <div class="footer-col">
+      <h3>PixelResize</h3>
+      <p>
+        Free online tools to resize, compress and convert images instantly.
+        Fast, secure, and 100% browser-based.
+      </p>
+    </div>
+
+    <!-- COLUMN 2 -->
+    <div class="footer-col">
+      <h4>About Company</h4>
+      <p>
+        PixelResize is an independent web tool designed to help users optimize images easily and securely using modern browser technology.
+      </p>
+    </div>
+
+    <!-- COLUMN 3 -->
+    <div class="footer-col">
+      <h4>Tools</h4>
+      <ul>
+        <li><a href="/tools/image-resizer">Image Resizer</a></li>
+        <li><a href="/tools/image-compressor">Image Compressor</a></li>
+        <li><a href="/tools/png-to-webp">PNG to WebP</a></li>
+        <li><a href="/tools/image-crop">Image Crop Tool</a></li>
+      </ul>
+    </div>
+
+    <!-- COLUMN 4 -->
+    <div class="footer-col">
+      <h4>Guides</h4>
+      <ul>
+        <li><a href="/blog/how-to-resize-images-online/">How to Resize Images</a></li>
+        <li><a href="/blog/best-image-format-for-websites/">Best Image Format</a></li>
+        <li><a href="/blog/seo-image-guide/">SEO Guide</a></li>
+        <li><a href="/blog/animated-formats/">Animated Formats</a></li>
+      </ul>
+    </div>
+
+    <!-- COLUMN 5 -->
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/terms">Terms & Conditions</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 PixelResize. All rights reserved.</p>
+    <p class="footer-note">
+      All processing happens locally in your browser. No images are uploaded or stored.
+    </p>
+  </div>
+</footer>
+<p style="font-size:12px; text-align:center; color:#94a3b8;">
+PixelResize is built for privacy-first image optimization. No data is stored or tracked.
+</p>
+
+    <script type="module" src="crop-script.js" defer></script>
 </body>
 </html>

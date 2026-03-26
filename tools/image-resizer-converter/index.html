@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Resizer & WebP Converter - Resize and Convert Images Online | PixelResize</title>
+    <meta name="description" content="Resize images and convert JPG/PNG to WebP online for free. Fast, secure, and 100% private image processing directly in your browser.">
+    <link rel="canonical" href="https://pixelresize.site/tools/image-resizer-converter">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <style>
+        :root { --primary: #4F46E5; --primary-hover: #4338CA; --background: #F8FAFC; --text-main: #111827; --text-muted: #64748B; --white: #FFFFFF; --border: #E2E8F0; --radius: 16px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--background); color: var(--text-main); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .header { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; height: 72px; display: flex; align-items: center; }
+        .nav { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; }
+        .logo-accent { color: var(--primary); }
+        .nav-links { display: flex; list-style: none; gap: 24px; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--primary); }
+        
+        .hero { padding: 60px 0; text-align: center; }
+        .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.03em; }
+        .hero-title-black { color: #000; }
+        .hero-title-gradient { background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { font-size: 1.25rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 32px; }
+
+        .tool-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); max-width: 800px; margin: 0 auto; }
+        .upload-area { border: 2px dashed var(--border); border-radius: 12px; padding: 48px; text-align: center; cursor: pointer; transition: all 0.2s; margin-bottom: 24px; }
+        .upload-area:hover { border-color: var(--primary); background: #F5F3FF; }
+        .btn { background: var(--primary); color: var(--white); padding: 12px 24px; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; transition: background 0.2s; display: inline-block; text-decoration: none; }
+        .btn:hover { background: var(--primary-hover); }
+        .btn-secondary { background: #10B981; }
+        .btn-secondary:hover { background: #059669; }
+        
+        .preview-container { text-align: center; margin-top: 24px; display: none; }
+        .preview-img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); }
+        
+        .controls { margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .input-group { display: flex; flex-direction: column; gap: 8px; text-align: left; }
+        .input-group label { font-size: 0.875rem; font-weight: 600; color: var(--text-muted); }
+        .input-group input { padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; }
+        
+        .action-buttons { margin-top: 24px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+        .site-footer { background: var(--white); border-top: 1px solid var(--border); padding: 60px 0; margin-top: 80px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .footer-col h3, .footer-col h4 { margin-bottom: 20px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { text-decoration: none; color: var(--text-muted); transition: color 0.2s; }
+        .footer-col ul li a:hover { color: var(--primary); }
+
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 2rem; }
+            .controls { grid-template-columns: 1fr; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="container nav">
+            <a href="/" class="logo"><span class="logo-accent">Pixel</span>Resize</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/tools/image-resizer-converter">Resizer & Converter</a></li>
+                <li><a href="/tools/resize-image-to-kb">Resize to KB</a></li>
+                <li><a href="/blog/how-to-resize-images-online/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1><span class="hero-title-black">Image Resizer &</span> <span class="hero-title-gradient">WebP Converter</span></h1>
+            <p class="hero-subtitle">The all-in-one tool to resize your images and convert them to the modern WebP format. Fast, free, and completely private.</p>
+        </section>
+
+        <div class="tool-card">
+            <div class="upload-area" id="dropZone" onclick="document.getElementById('upload').click()">
+                <p>Click to upload or drag and drop your image (JPG, PNG, WebP)</p>
+                <input type="file" id="upload" accept="image/*" hidden>
+            </div>
+
+            <div id="editor" style="display: none;">
+                <div class="preview-container" id="previewContainer" style="display: block;">
+                    <p id="imageInfo" style="margin-bottom: 8px; font-size: 0.875rem; color: var(--text-muted);"></p>
+                    <img id="preview" class="preview-img">
+                </div>
+
+                <div class="controls">
+                    <div class="input-group">
+                        <label for="width">Width (px)</label>
+                        <input type="number" id="width" placeholder="Original width">
+                    </div>
+                    <div class="input-group">
+                        <label for="height">Height (px)</label>
+                        <input type="number" id="height" placeholder="Original height">
+                    </div>
+                </div>
+
+                <div style="margin-top: 16px; text-align: left;">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.875rem;">
+                        <input type="checkbox" id="maintainAspectRatio" checked> Maintain Aspect Ratio
+                    </label>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn" id="resizeBtn">Resize & Download JPG</button>
+                    <button class="btn btn-secondary" id="convertBtn">Convert & Download WebP</button>
+                </div>
+            </div>
+        </div>
+
+        <section style="margin-top: 80px; max-width: 800px; margin: 80px auto 0;">
+            <h2 style="font-size: 2rem; margin-bottom: 24px;">How to use the Image Resizer & Converter</h2>
+            <div style="display: grid; gap: 32px;">
+                <div>
+                    <h3 style="margin-bottom: 12px;">1. Upload your image</h3>
+                    <p>Select a JPG, PNG, or WebP image from your device. Your file stays in your browser and is never uploaded to our servers.</p>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 12px;">2. Set new dimensions</h3>
+                    <p>Enter the desired width or height. By default, the aspect ratio is maintained to prevent distortion.</p>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 12px;">3. Choose your format</h3>
+                    <p>Click "Resize & Download JPG" for a standard image or "Convert & Download WebP" for a modern, highly-compressed version perfect for websites.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3>PixelResize</h3>
+                <p>Free online tools to resize, compress and convert images instantly.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="/tools/image-resizer-converter">Resizer & Converter</a></li>
+                    <li><a href="/tools/resize-image-to-kb">Resize to KB</a></li>
+                    <li><a href="/tools/image-compressor">Image Compressor</a></li>
+                    <li><a href="/tools/crop-image">Crop Image</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Guides</h4>
+                <ul>
+                    <li><a href="/blog/how-to-resize-images-online/">How to Resize Images</a></li>
+                    <li><a href="/blog/best-image-format-for-websites/">Best Image Format</a></li>
+                    <li><a href="/blog/seo-image-optimization-guide/">SEO Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="/about.html">About Us</a></li>
+                    <li><a href="/privacy.html">Privacy Policy</a></li>
+                    <li><a href="/terms.html">Terms of Service</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center;">
+            <p>&copy; 2026 PixelResize. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const upload = document.getElementById('upload');
+        const editor = document.getElementById('editor');
+        const preview = document.getElementById('preview');
+        const imageInfo = document.getElementById('imageInfo');
+        const widthInput = document.getElementById('width');
+        const heightInput = document.getElementById('height');
+        const maintainAspectRatio = document.getElementById('maintainAspectRatio');
+        const resizeBtn = document.getElementById('resizeBtn');
+        const convertBtn = document.getElementById('convertBtn');
+        const dropZone = document.getElementById('dropZone');
+
+        let originalImage = null;
+        let aspectRatio = 1;
+
+        upload.addEventListener('change', handleFile);
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = 'var(--primary)';
+            dropZone.style.background = '#F5F3FF';
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.style.borderColor = 'var(--border)';
+            dropZone.style.background = 'transparent';
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                processFile(file);
+            }
+        });
+
+        function handleFile(e) {
+            const file = e.target.files[0];
+            if (file) processFile(file);
+        }
+
+        function processFile(file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const img = new Image();
+                img.onload = () => {
+                    originalImage = img;
+                    aspectRatio = img.width / img.height;
+                    
+                    preview.src = event.target.result;
+                    widthInput.value = img.width;
+                    heightInput.value = img.height;
+                    imageInfo.innerText = `Original: ${img.width}x${img.height}px | ${file.name}`;
+                    
+                    editor.style.display = 'block';
+                    dropZone.style.display = 'none';
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        widthInput.addEventListener('input', () => {
+            if (maintainAspectRatio.checked && originalImage) {
+                heightInput.value = Math.round(widthInput.value / aspectRatio);
+            }
+        });
+
+        heightInput.addEventListener('input', () => {
+            if (maintainAspectRatio.checked && originalImage) {
+                widthInput.value = Math.round(heightInput.value * aspectRatio);
+            }
+        });
+
+        resizeBtn.addEventListener('click', () => processAndDownload('image/jpeg', 'jpg'));
+        convertBtn.addEventListener('click', () => processAndDownload('image/webp', 'webp'));
+
+        function processAndDownload(format, extension) {
+            if (!originalImage) return;
+
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            const targetWidth = parseInt(widthInput.value) || originalImage.width;
+            const targetHeight = parseInt(heightInput.value) || originalImage.height;
+
+            canvas.width = targetWidth;
+            canvas.height = targetHeight;
+
+            ctx.drawImage(originalImage, 0, 0, targetWidth, targetHeight);
+
+            const dataUrl = canvas.toDataURL(format, 0.9);
+            const link = document.createElement('a');
+            link.download = `pixelresize-${Date.now()}.${extension}`;
+            link.href = dataUrl;
+            link.click();
+        }
+    </script>
+</body>
+</html>

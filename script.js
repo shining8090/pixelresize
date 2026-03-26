@@ -26,6 +26,25 @@ const heroGrid = document.querySelector('.hero-grid');
 const resizeBtn = document.getElementById('resize-btn');
 const downloadBtn = document.getElementById('download-btn');
 
+const errorMessage = document.getElementById('error-message');
+
+// User-friendly error display
+function showError(message) {
+    if (errorMessage) {
+        errorMessage.textContent = message;
+        errorMessage.classList.remove('hidden');
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            errorMessage.classList.add('hidden');
+        }, 5000);
+        
+        // Scroll to error if not visible
+        errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+        alert(message);
+    }
+}
+
 const cropInitBtn = document.getElementById('crop-init-btn');
 const cropActions = document.getElementById('crop-actions');
 const cropConfirmBtn = document.getElementById('crop-confirm-btn');
@@ -36,6 +55,12 @@ let originalFile = null;
 let aspectRatio = 1;
 let pendingSettings = null;
 let cropper = null;
+let hasActiveSession = false;
+let pendingToolClick = null;
+
+const modal = document.getElementById("toolSwitchModal");
+const continueBtn = document.getElementById("continueBtn");
+const confirmBtn = document.getElementById("confirmSwitchBtn");
 
 // Safe Event Listener Helper
 function safeAddEventListener(id, event, callback) {
@@ -88,36 +113,66 @@ if (dropZone) {
     }
 
     function handleFile(file) {
-        if (!file.type.startsWith('image/')) {
-            alert('Please upload an image file.');
+        if (!file) return;
+        
+        // Validate file type
+        const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/avif', 'image/bmp', 'image/gif'];
+        if (!validTypes.includes(file.type)) {
+            showError('Unsupported file format. Please upload a JPG, PNG, WebP, AVIF, or BMP image.');
+            return;
+        }
+
+        // Validate file size (e.g., 50MB limit)
+        const maxSize = 50 * 1024 * 1024;
+        if (file.size > maxSize) {
+            showError('File is too large. Please upload an image smaller than 50MB.');
             return;
         }
 
         originalFile = file;
         if (downloadBtn) downloadBtn.disabled = true;
         const reader = new FileReader();
+        
+        reader.onerror = () => {
+            showError('Failed to read the file. Please try again.');
+        };
+
         reader.onload = (e) => {
             const img = new Image();
+            
+            img.onerror = () => {
+                showError('Failed to load the image. The file might be corrupted.');
+            };
+
             img.onload = () => {
-                originalImage = img;
-                aspectRatio = img.width / img.height;
-                
-                // Set initial values
-                if (inputWidth) inputWidth.value = img.width;
-                if (inputHeight) inputHeight.value = img.height;
-                if (sizeOriginal) sizeOriginal.textContent = formatBytes(file.size);
-                
-                // Show preview
-                if (imagePreview) imagePreview.src = e.target.result;
-                if (uploadPlaceholder) uploadPlaceholder.style.display = 'none';
-                if (previewContainer) previewContainer.style.display = 'flex';
-                
-                if (settingsSection) settingsSection.classList.remove('hidden');
-                if (heroGrid) heroGrid.classList.remove('single-col');
-                
-                if (downloadBtn) downloadBtn.disabled = true;
-                applyPendingSettings();
-                updateEstimatedSize();
+                try {
+                    originalImage = img;
+                    hasActiveSession = true;
+                    aspectRatio = img.width / img.height;
+                    
+                    // Set initial values
+                    if (inputWidth) inputWidth.value = img.width;
+                    if (inputHeight) inputHeight.value = img.height;
+                    if (sizeOriginal) sizeOriginal.textContent = formatBytes(file.size);
+                    
+                    // Show preview
+                    if (imagePreview) imagePreview.src = e.target.result;
+                    if (uploadPlaceholder) uploadPlaceholder.style.display = 'none';
+                    if (previewContainer) previewContainer.style.display = 'flex';
+                    
+                    if (settingsSection) settingsSection.classList.remove('hidden');
+                    if (heroGrid) heroGrid.classList.remove('single-col');
+                    
+                    if (downloadBtn) downloadBtn.disabled = true;
+                    applyPendingSettings();
+                    updateEstimatedSize();
+                    
+                    // Clear any previous errors
+                    if (errorMessage) errorMessage.classList.add('hidden');
+                } catch (err) {
+                    console.error('Error handling image load:', err);
+                    showError('An unexpected error occurred while processing the image.');
+                }
             };
             img.src = e.target.result;
         };
@@ -130,6 +185,7 @@ if (dropZone) {
             destroyCropper();
             originalImage = null;
             originalFile = null;
+            hasActiveSession = false;
             if (fileInput) fileInput.value = '';
             if (uploadPlaceholder) uploadPlaceholder.style.display = 'block';
             if (previewContainer) previewContainer.style.display = 'none';
@@ -259,15 +315,15 @@ if (dropZone) {
     // Processing Logic
     let debounceTimer;
     async function updateEstimatedSize() {
-        if (!originalImage || !inputWidth || !inputHeight || !selectFormat || !inputQuality || !sizeEstimated) return;
+        if (!originalImage || !inputQuality || !sizeEstimated) return;
 
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(() => {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             
-            const w = parseInt(inputWidth.value) || originalImage.width;
-            const h = parseInt(inputHeight.value) || originalImage.height;
+            const w = (inputWidth && parseInt(inputWidth.value)) || originalImage.width;
+            const h = (inputHeight && parseInt(inputHeight.value)) || originalImage.height;
             
             canvas.width = w;
             canvas.height = h;
@@ -275,7 +331,7 @@ if (dropZone) {
             ctx.imageSmoothingQuality = 'high';
             ctx.drawImage(originalImage, 0, 0, w, h);
             
-            const format = selectFormat.value;
+            const format = (selectFormat && selectFormat.value) || 'image/jpeg';
             const quality = parseInt(inputQuality.value) / 100;
             
             canvas.toBlob((blob) => {
@@ -289,45 +345,50 @@ if (dropZone) {
     if (resizeBtn) {
         resizeBtn.addEventListener('click', () => {
             if (!originalImage) {
-                alert('Please upload an image first.');
+                showError('Please upload an image first.');
                 return;
             }
-            updateEstimatedSize();
-            if (downloadBtn) downloadBtn.disabled = false;
-            alert('Settings applied! You can now download your image.');
+            try {
+                updateEstimatedSize();
+                if (downloadBtn) downloadBtn.disabled = false;
+                // Success feedback could be a toast, but for now let's just enable download
+            } catch (err) {
+                console.error('Resize error:', err);
+                showError('Failed to apply changes. Please check your settings.');
+            }
         });
     }
 
     if (downloadBtn) {
         downloadBtn.addEventListener('click', () => {
             if (!originalImage) {
-                alert('Please upload an image first.');
+                showError('Please upload an image first.');
                 return;
             }
 
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            
-            let w = parseInt(inputWidth.value);
-            let h = parseInt(inputHeight.value);
-
-            if (isNaN(w) || w <= 0) w = originalImage.width;
-            if (isNaN(h) || h <= 0) h = originalImage.height;
-            
-            canvas.width = w;
-            canvas.height = h;
-            ctx.imageSmoothingEnabled = true;
-            ctx.imageSmoothingQuality = 'high';
-            ctx.drawImage(originalImage, 0, 0, w, h);
-            
-            const format = selectFormat.value;
-            const quality = parseInt(inputQuality.value) / 100;
-            const extension = format.split('/')[1].replace('jpeg', 'jpg');
-
             try {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                let w = (inputWidth && parseInt(inputWidth.value)) || originalImage.width;
+                let h = (inputHeight && parseInt(inputHeight.value)) || originalImage.height;
+
+                if (isNaN(w) || w <= 0) w = originalImage.width;
+                if (isNaN(h) || h <= 0) h = originalImage.height;
+                
+                canvas.width = w;
+                canvas.height = h;
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = 'high';
+                ctx.drawImage(originalImage, 0, 0, w, h);
+                
+                const format = (selectFormat && selectFormat.value) || 'image/jpeg';
+                const quality = (inputQuality && parseInt(inputQuality.value) / 100) || 0.85;
+                const extension = format.split('/')[1].replace('jpeg', 'jpg');
+
                 canvas.toBlob((blob) => {
                     if (!blob) {
-                        alert('Failed to generate image. Please try a different format.');
+                        showError('Failed to generate image. Please try a different format or quality setting.');
                         return;
                     }
                     const url = URL.createObjectURL(blob);
@@ -343,7 +404,7 @@ if (dropZone) {
                 }, format, quality);
             } catch (err) {
                 console.error('Download error:', err);
-                alert('An error occurred while generating the image.');
+                showError('An error occurred while generating the image. Your browser might not support this format.');
             }
         });
     }
@@ -399,20 +460,40 @@ if (dropZone) {
     if (base64Btn) {
         base64Btn.addEventListener('click', () => {
             if (!originalImage) return;
-            const canvas = document.createElement('canvas');
-            canvas.width = originalImage.width;
-            canvas.height = originalImage.height;
-            canvas.getContext('2d').drawImage(originalImage, 0, 0);
-            const base64 = canvas.toDataURL(originalFile ? originalFile.type : 'image/png');
             
-            navigator.clipboard.writeText(base64).then(() => {
-                const originalText = base64Btn.textContent;
-                base64Btn.textContent = 'Copied!';
-                setTimeout(() => base64Btn.textContent = originalText, 2000);
-            }).catch(() => {
-                alert('Failed to copy Base64 to clipboard. Check console.');
-                console.log(base64);
-            });
+            try {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                let w = (inputWidth && parseInt(inputWidth.value)) || originalImage.width;
+                let h = (inputHeight && parseInt(inputHeight.value)) || originalImage.height;
+
+                if (isNaN(w) || w <= 0) w = originalImage.width;
+                if (isNaN(h) || h <= 0) h = originalImage.height;
+                
+                canvas.width = w;
+                canvas.height = h;
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = 'high';
+                ctx.drawImage(originalImage, 0, 0, w, h);
+                
+                const format = (selectFormat && selectFormat.value) || 'image/jpeg';
+                const quality = (inputQuality && parseInt(inputQuality.value) / 100) || 0.85;
+                
+                const base64 = canvas.toDataURL(format, quality);
+                
+                navigator.clipboard.writeText(base64).then(() => {
+                    const originalText = base64Btn.textContent;
+                    base64Btn.textContent = 'Copied!';
+                    setTimeout(() => base64Btn.textContent = originalText, 2000);
+                }).catch((err) => {
+                    console.error('Clipboard error:', err);
+                    showError('Failed to copy Base64 to clipboard. Your browser might not support this feature.');
+                });
+            } catch (err) {
+                console.error('Base64 error:', err);
+                showError('An error occurred while generating the Base64 string.');
+            }
         });
     }
 
@@ -504,35 +585,16 @@ if (dropZone) {
             if (navLinks) navLinks.classList.remove('active');
             if (mobileMenuToggle) mobileMenuToggle.classList.remove('active');
 
-            if (this.id === 'home-link' || this.id === 'tools-link') {
-                // Trigger popunder ad on Home and Tools links
-                triggerPopunder();
-                
-                if (this.id === 'home-link') {
-                    e.preventDefault();
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                }
+            if (this.id === 'home-link') {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             }
         });
     });
 
-    function triggerPopunder() {
-        const scriptUrl = "https://pl28859112.effectivegatecpm.com/4f/18/7c/4f187c00a745c0a4440f2e3ee94a3621.js";
-        
-        // Remove existing script to avoid duplication and allow re-execution if needed
-        const existingScript = document.querySelector(`script[src="${scriptUrl}"]`);
-        if (existingScript) {
-            existingScript.remove();
-        }
-
-        const script = document.createElement('script');
-        script.src = scriptUrl;
-        script.async = true;
-        document.body.appendChild(script);
-    }
 
     // Tool card behavior: Scroll to #upload and trigger upload
     document.querySelectorAll('.tool-card a').forEach(link => {
@@ -542,52 +604,83 @@ if (dropZone) {
 
             e.preventDefault();
             
-            const h3 = link.querySelector('h3');
-            if (!h3) return;
-            const title = h3.textContent;
-            
-            // Set pending settings based on tool
-            if (title.includes('PNG to JPG') || title.includes('WebP to JPG')) {
-                pendingSettings = { format: 'image/jpeg' };
-            } else if (title.includes('JPG to PNG')) {
-                pendingSettings = { format: 'image/png' };
-            } else if (title.includes('JPG to WebP') || title.includes('GIF to WebP')) {
-                pendingSettings = { format: 'image/webp' };
-            } else if (title.includes('PNG to AVIF')) {
-                pendingSettings = { format: 'image/avif' };
-            } else if (title.includes('PNG to BMP')) {
-                pendingSettings = { format: 'image/bmp' };
-            } else if (title === 'Image Compressor') {
-                pendingSettings = { quality: 60 };
-            } else if (title === 'Metadata Remover') {
-                if (checkMetadata) checkMetadata.checked = true;
+            if (hasActiveSession) {
+                pendingToolClick = link;
+                if (modal) modal.classList.add("active");
             } else {
-                pendingSettings = null;
-            }
-            
-            // Smoothly scroll to #upload section
-            const uploadSection = document.getElementById('upload');
-            if (uploadSection) {
-                uploadSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-
-            // If no image is uploaded, trigger upload box
-            if (!originalImage) {
-                setTimeout(() => {
-                    if (fileInput) fileInput.click();
-                }, 600); // Wait for scroll to finish mostly
-            } else {
-                // If image is already uploaded, apply settings immediately
-                applyPendingSettings();
-                updateEstimatedSize();
-                
-                // If crop tool, trigger crop
-                if (title === 'Image Crop Tool') {
-                    if (cropInitBtn) cropInitBtn.click();
-                }
+                handleToolClick(link);
             }
         });
     });
+
+    function handleToolClick(link) {
+        const h3 = link.querySelector('h3');
+        if (!h3) return;
+        const title = h3.textContent;
+        
+        // Set pending settings based on tool
+        if (title.includes('PNG to JPG') || title.includes('WebP to JPG')) {
+            pendingSettings = { format: 'image/jpeg' };
+        } else if (title.includes('JPG to PNG')) {
+            pendingSettings = { format: 'image/png' };
+        } else if (title.includes('JPG to WebP') || title.includes('GIF to WebP')) {
+            pendingSettings = { format: 'image/webp' };
+        } else if (title.includes('PNG to AVIF')) {
+            pendingSettings = { format: 'image/avif' };
+        } else if (title.includes('PNG to BMP')) {
+            pendingSettings = { format: 'image/bmp' };
+        } else if (title === 'Image Compressor') {
+            pendingSettings = { quality: 60 };
+        } else if (title === 'Metadata Remover') {
+            if (checkMetadata) checkMetadata.checked = true;
+        } else {
+            pendingSettings = null;
+        }
+        
+        // Smoothly scroll to #upload section
+        const uploadSection = document.getElementById('upload');
+        if (uploadSection) {
+            uploadSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // If no image is uploaded, trigger upload box
+        if (!originalImage) {
+            setTimeout(() => {
+                if (fileInput) fileInput.click();
+            }, 600); // Wait for scroll to finish mostly
+        } else {
+            // If image is already uploaded, apply settings immediately
+            applyPendingSettings();
+            updateEstimatedSize();
+            
+            // If crop tool, trigger crop
+            if (title === 'Image Crop Tool') {
+                if (cropInitBtn) cropInitBtn.click();
+            }
+        }
+    }
+
+    // Modal Event Listeners
+    if (continueBtn) {
+        continueBtn.addEventListener('click', () => {
+            if (modal) modal.classList.remove("active");
+            pendingToolClick = null;
+        });
+    }
+
+    if (confirmBtn) {
+        confirmBtn.addEventListener('click', () => {
+            if (modal) modal.classList.remove("active");
+            
+            // Reset current tool state
+            if (removeBtn) removeBtn.click();
+            
+            if (pendingToolClick) {
+                handleToolClick(pendingToolClick);
+                pendingToolClick = null;
+            }
+        });
+    }
 
 // Cookie Consent Logic
 document.addEventListener('DOMContentLoaded', () => {

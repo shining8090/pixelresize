@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resize Image to KB - Compress Image to 10KB, 20KB, 50KB, 100KB Online</title>
+    <meta name="description" content="Resize and compress your images to specific KB sizes (10KB, 20KB, 50KB, 100KB) online for free. Fast, secure, and private image optimization in your browser.">
+    <link rel="canonical" href="https://pixelresize.site/resize-image-to-kb/">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Resize Image to KB - Compress Image to 10KB, 20KB, 50KB, 100KB">
+    <meta property="og:description" content="Free online tool to compress images to specific file sizes like 10KB, 20KB, 50KB, or 100KB instantly.">
+    <meta property="og:url" content="https://pixelresize.site/resize-image-to-kb/">
+    <meta property="og:type" content="website">
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        @import "tailwindcss";
+        :root { --primary: #4F46E5; --primary-hover: #4338CA; --background: #F8FAFC; --text-main: #111827; --text-muted: #64748B; --white: #FFFFFF; --border: #E2E8F0; --radius: 16px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--background); color: var(--text-main); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .header { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; height: 72px; display: flex; align-items: center; }
+        .nav { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; }
+        .logo-accent { color: var(--primary); }
+        .nav-links { display: flex; list-style: none; gap: 24px; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--primary); }
+        
+        .hero { padding: 60px 0; text-align: center; }
+        .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.03em; }
+        .hero-title-black { color: #000; }
+        .hero-title-gradient { background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { font-size: 1.25rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 32px; }
+
+        .tool-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); max-width: 800px; margin: 0 auto; }
+        .upload-area { border: 2px dashed var(--border); border-radius: 12px; padding: 48px; text-align: center; cursor: pointer; transition: all 0.2s; margin-bottom: 24px; }
+        .upload-area:hover { border-color: var(--primary); background: #F5F3FF; }
+        .btn { background: var(--primary); color: var(--white); padding: 12px 24px; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; transition: background 0.2s; display: inline-block; text-decoration: none; }
+        .btn:hover { background: var(--primary-hover); }
+        .btn-outline { background: transparent; color: var(--primary); border: 1px solid var(--primary); }
+        .btn-outline:hover { background: #F5F3FF; }
+        .preview-img { max-width: 100%; border-radius: 8px; margin-top: 20px; display: none; }
+        .controls { margin-top: 24px; display: flex; flex-direction: column; gap: 20px; align-items: center; }
+        .preset-buttons { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+        .input-group { display: flex; align-items: center; gap: 12px; }
+        .input-field { padding: 10px; border: 1px solid var(--border); border-radius: 8px; width: 100px; text-align: center; }
+
+        .seo-section { margin-top: 80px; }
+        .seo-content { max-width: 800px; margin: 0 auto; }
+        .seo-content h2 { font-size: 2rem; margin-bottom: 24px; }
+        .seo-content h3 { font-size: 1.5rem; margin-top: 32px; margin-bottom: 16px; }
+        .seo-content p { margin-bottom: 16px; color: var(--text-muted); }
+        .seo-content ul { margin-bottom: 24px; margin-left: 24px; color: var(--text-muted); }
+        .seo-content li { margin-bottom: 8px; }
+
+        .faq-section { background: #F1F5F9; padding: 80px 0; margin-top: 80px; }
+        .faq-grid { display: grid; gap: 24px; max-width: 800px; margin: 0 auto; }
+        .faq-item { background: var(--white); padding: 24px; border-radius: 12px; border: 1px solid var(--border); }
+        .faq-item h4 { font-size: 1.1rem; margin-bottom: 12px; color: var(--text-main); }
+
+        .site-footer { background: var(--white); border-top: 1px solid var(--border); padding: 60px 0; margin-top: 80px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .footer-col h3, .footer-col h4 { margin-bottom: 20px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { text-decoration: none; color: var(--text-muted); transition: color 0.2s; }
+        .footer-col ul li a:hover { color: var(--primary); }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Resize Image to KB",
+      "url": "https://pixelresize.site/resize-image-to-kb/",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "description": "Compress images to specific file sizes like 10KB, 20KB, 50KB, or 100KB online for free.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I resize an image to 20KB?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Upload your image, click the '20KB' preset button or enter '20' in the target size field, and click 'Compress Image'. The tool will automatically adjust the quality to reach your target size."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it safe to compress images online?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, our tool processes images directly in your browser. Your files are never uploaded to our servers, ensuring 100% privacy and security."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I compress any image format?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our tool supports common formats like JPG, PNG, and WebP. For the best compression results to specific KB sizes, JPG is recommended."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="container nav">
+            <a href="/" class="logo"><span class="logo-accent">Pixel</span>Resize</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/tools/image-resizer">Resizer</a></li>
+                <li><a href="/tools/image-compressor">Compressor</a></li>
+                <li><a href="/blog/how-to-resize-images-online/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1><span class="hero-title-black">Resize Image to</span> <span class="hero-title-gradient">Specific KB Size</span></h1>
+            <p class="hero-subtitle">Compress your images to exactly 10KB, 20KB, 50KB, or any custom size instantly. Fast, free, and secure browser-based optimization.</p>
+        </section>
+
+        <div class="tool-card">
+            <div class="upload-area" id="dropZone" onclick="document.getElementById('upload').click()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4 text-indigo-600"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                <p class="text-lg font-semibold">Click to upload or drag and drop</p>
+                <p class="text-sm text-gray-500 mt-2">Supports JPG, PNG, WebP</p>
+                <input type="file" id="upload" accept="image/*" hidden>
+            </div>
+            
+            <div id="fileInfo" style="display: none; text-align: center; margin-bottom: 20px;">
+                <p id="fileName" class="font-bold"></p>
+                <p id="fileSize" class="text-sm text-gray-500"></p>
+            </div>
+
+            <div style="text-align: center;">
+                <img id="preview" class="preview-img mx-auto">
+            </div>
+
+            <div class="controls">
+                <div class="preset-buttons">
+                    <button class="btn btn-outline" onclick="setTargetSize(10)">10 KB</button>
+                    <button class="btn btn-outline" onclick="setTargetSize(20)">20 KB</button>
+                    <button class="btn btn-outline" onclick="setTargetSize(50)">50 KB</button>
+                    <button class="btn btn-outline" onclick="setTargetSize(100)">100 KB</button>
+                </div>
+                
+                <div class="input-group">
+                    <label for="targetSize" class="font-medium">Target Size:</label>
+                    <input type="number" id="targetSize" class="input-field" value="50" min="1">
+                    <span class="font-medium">KB</span>
+                </div>
+
+                <button class="btn w-full md:w-auto" onclick="compressImage()">Compress Image</button>
+            </div>
+            
+            <div id="resultArea" style="display: none; text-align: center; margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border);">
+                <p class="mb-4 font-semibold text-green-600">Compression Complete!</p>
+                <p id="resultSize" class="mb-4 text-sm text-gray-600"></p>
+                <a id="downloadLink" class="btn" style="background: #10B981;">Download Compressed Image</a>
+            </div>
+        </div>
+
+        <section class="seo-section">
+            <div class="seo-content">
+                <h2>Why Resize Images to Specific KB Sizes?</h2>
+                <p>Many government portals, job applications, and educational websites require you to upload images within a strict file size limit. Common requirements include 10KB, 20KB, 50KB, and 100KB. Manually adjusting these can be frustrating, but our tool automates the process using advanced browser-side compression.</p>
+
+                <h3>Resize Image to 10KB</h3>
+                <p>Compressing an image to 10KB is often required for small profile pictures or signatures. Our algorithm iteratively reduces quality and dimensions slightly if necessary to hit this ultra-low target without making the image unrecognizable.</p>
+
+                <h3>Resize Image to 20KB & 50KB</h3>
+                <p>These are the most common requirements for online forms. A 50KB limit usually allows for a decent quality passport-sized photo. Our tool ensures you stay just under the limit while maintaining the best possible visual clarity.</p>
+
+                <h3>Resize Image to 100KB</h3>
+                <p>For larger documents or clear ID photos, 100KB is a standard limit. This allows for higher resolution and better detail. Our tool optimizes the file structure to give you the sharpest image possible under 100KB.</p>
+
+                <h2>How to Use the KB Resizer</h2>
+                <ul>
+                    <li><strong>Step 1:</strong> Upload your image (JPG, PNG, or WebP).</li>
+                    <li><strong>Step 2:</strong> Select a preset (10KB, 20KB, 50KB, 100KB) or enter a custom value.</li>
+                    <li><strong>Step 3:</strong> Click "Compress Image" and wait a few seconds.</li>
+                    <li><strong>Step 4:</strong> Download your optimized image instantly.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 40px;">Frequently Asked Questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4>Will I lose image quality?</h4>
+                        <p>Compression always involves some quality loss, but our tool uses a smart algorithm to minimize this. We prioritize clarity while ensuring the file size target is met.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Is my data private?</h4>
+                        <p>Absolutely. All processing happens locally in your browser. We never upload your images to any server, so your privacy is 100% guaranteed.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>What is the best format for small file sizes?</h4>
+                        <p>JPG is generally the best format for reaching specific KB targets like 20KB or 50KB because it offers the most flexible compression options.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- COLUMN 1: TOOLS -->
+    <div class="footer-col">
+      <h4>Tools</h4>
+      <ul>
+        <li><a href="/tools/image-resizer" title="Resize images online">Image Resizer</a></li>
+        <li><a href="/tools/image-compressor" title="Compress images online">Image Compressor</a></li>
+        <li><a href="/tools/png-to-webp" title="Convert PNG to WebP">PNG to WebP</a></li>
+        <li><a href="/tools/image-crop" title="Crop images online">Image Crop Tool</a></li>
+      </ul>
+    </div>
+
+    <!-- COLUMN 2: GUIDES -->
+    <div class="footer-col">
+      <h4>Guides</h4>
+      <ul>
+        <li><a href="/blog/how-to-resize-images-online/" title="Guide on resizing images">How to Resize Images</a></li>
+        <li><a href="/blog/best-image-format-for-websites/" title="Choosing the best image format">Best Image Format</a></li>
+        <li><a href="/blog/seo-image-guide/" title="Image SEO optimization guide">SEO Guide</a></li>
+        <li><a href="/blog/animated-formats/" title="Guide on animated image formats">Animated Formats</a></li>
+      </ul>
+    </div>
+
+    <!-- COLUMN 3: LEGAL -->
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="/privacy" title="Our Privacy Policy">Privacy Policy</a></li>
+        <li><a href="/terms" title="Our Terms and Conditions">Terms & Conditions</a></li>
+        <li><a href="/contact" title="Contact us">Contact</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-about">
+      <h3>PixelResize</h3>
+      <p>Free online tools to resize, compress and convert images instantly. Fast, secure, and 100% browser-based. PixelResize is an independent web tool designed to help users optimize images easily and securely using modern browser technology.</p>
+    </div>
+    <p>© 2026 PixelResize. All rights reserved.</p>
+    <p class="footer-note">
+      All processing happens locally in your browser. No images are uploaded or stored.
+    </p>
+  </div>
+</footer>
+<p style="font-size:12px; text-align:center; color:#94a3b8;">
+PixelResize is built for privacy-first image optimization. No data is stored or tracked.
+</p>
+
+    <script>
+    let uploadedImage = null;
+    let originalFileName = "";
+
+    function setTargetSize(kb) {
+        document.getElementById("targetSize").value = kb;
+    }
+
+    document.getElementById("upload").addEventListener("change", function(e) {
+        handleFiles(e.target.files);
+    });
+
+    const dropZone = document.getElementById('dropZone');
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.style.borderColor = '#4F46E5';
+        dropZone.style.background = '#F5F3FF';
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.style.borderColor = '#E2E8F0';
+        dropZone.style.background = 'transparent';
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.style.borderColor = '#E2E8F0';
+        dropZone.style.background = 'transparent';
+        handleFiles(e.dataTransfer.files);
+    });
+
+    function handleFiles(files) {
+        const file = files[0];
+        if (!file) return;
+
+        originalFileName = file.name.split('.').slice(0, -1).join('.');
+        document.getElementById("fileInfo").style.display = "block";
+        document.getElementById("fileName").innerText = file.name;
+        document.getElementById("fileSize").innerText = `Original Size: ${(file.size / 1024).toFixed(2)} KB`;
+
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const img = document.getElementById("preview");
+            img.src = event.target.result;
+            img.style.display = "inline-block";
+            uploadedImage = img;
+            document.getElementById("resultArea").style.display = "none";
+        };
+        reader.readAsDataURL(file);
+    }
+
+    async function compressImage() {
+        if (!uploadedImage) {
+            alert("Please upload an image first!");
+            return;
+        }
+
+        const targetKB = parseInt(document.getElementById("targetSize").value);
+        if (isNaN(targetKB) || targetKB < 1) {
+            alert("Please enter a valid target size in KB.");
+            return;
+        }
+
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        // Start with original dimensions
+        let width = uploadedImage.naturalWidth;
+        let height = uploadedImage.naturalHeight;
+        
+        canvas.width = width;
+        canvas.height = height;
+        ctx.drawImage(uploadedImage, 0, 0, width, height);
+
+        let quality = 0.9;
+        let dataUrl = "";
+        let sizeKB = 0;
+
+        // Iterative compression
+        for (let i = 0; i < 15; i++) {
+            dataUrl = canvas.toDataURL("image/jpeg", quality);
+            const base64Length = dataUrl.split(',')[1].length;
+            sizeKB = (base64Length * (3/4)) / 1024;
+
+            if (sizeKB <= targetKB && sizeKB > targetKB * 0.8) break;
+            
+            if (sizeKB > targetKB) {
+                quality -= 0.08;
+                // If quality is already very low, start reducing dimensions
+                if (quality < 0.2) {
+                    width *= 0.9;
+                    height *= 0.9;
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(uploadedImage, 0, 0, width, height);
+                    quality = 0.5; // Reset quality for new dimensions
+                }
+            } else {
+                // Too small, increase quality slightly
+                quality += 0.03;
+            }
+            
+            if (quality < 0.05) break;
+            if (quality > 1) quality = 1;
+        }
+
+        const link = document.getElementById("downloadLink");
+        link.href = dataUrl;
+        link.download = `${originalFileName}-${targetKB}kb.jpg`;
+        
+        document.getElementById("resultArea").style.display = "block";
+        document.getElementById("resultSize").innerText = `Final Size: ${sizeKB.toFixed(2)} KB`;
+        
+        // Scroll to result
+        document.getElementById("resultArea").scrollIntoView({ behavior: 'smooth' });
+    }
+    </script>
+</body>
+</html>
