@@ -1,8 +1,13 @@
 User-agent: *
 Allow: /
+Disallow: /*?q=
+Disallow: /*?search=
+Disallow: /*?filter=
+Disallow: /*?sort=
 
 Sitemap: https://pixelresize.site/sitemap.xml
 
+# Allow AI crawlers
 User-agent: GPTBot
 Allow: /
 
