@@ -9,7 +9,7 @@ export default function ToolsGrid() {
       title: "HEIC to JPG Converter",
       desc: "Convert HEIC images to JPG instantly with high quality.",
       icon: Image,
-      link: "/heic-to-jpg",
+      link: "/tools/heic-to-jpg",
     },
     {
       title: "Resize Passport Photo",
