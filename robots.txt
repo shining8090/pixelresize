@@ -1,13 +1,16 @@
 User-agent: *
 Allow: /
+
+# Block search & filter URLs (good for SEO)
 Disallow: /*?q=
 Disallow: /*?search=
 Disallow: /*?filter=
 Disallow: /*?sort=
 
+# Sitemap
 Sitemap: https://pixelresize.site/sitemap.xml
 
-# Allow AI crawlers
+# Allow AI crawlers (optional)
 User-agent: GPTBot
 Allow: /
 
