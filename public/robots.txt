@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://pixelresize.site/sitemap.xml
-Sitemap: https://pixelresize.site/sitemap-images.xml
