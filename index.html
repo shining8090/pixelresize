@@ -1,0 +1,533 @@
+<!DOCTYPE html> <html lang="en"> <head> <script>
+if (location.hostname === "www.pixelresize.site") {
+  location.replace("https://pixelresize.site" + location.pathname + location.search);
+}
+</script> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Free Image Resizer Online – Resize, Compress & Convert Images | PixelResize</title>
+<meta name="description" content="PixelResize is a free, privacy-first online image resizer. Resize, compress, and convert JPG, PNG, WebP, and AVIF images directly in your browser. No uploads, 100% secure.">
+<link rel="canonical" href="https://pixelresize.site/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="author" content="PixelResize">
+<meta name="theme-color" content="#4F46E5">
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pixelresize.site/">
+<meta property="og:title" content="Free Image Resizer Online – Resize, Compress & Convert Images | PixelResize">
+<meta property="og:description" content="Resize, compress, and convert images instantly with PixelResize. Privacy-first, browser-based image optimization.">
+<meta property="og:image" content="https://pixelresize.site/og-image.jpg">
+<meta property="og:site_name" content="PixelResize">
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://pixelresize.site/">
+<meta property="twitter:title" content="Free Image Resizer Online – Resize, Compress & Convert Images | PixelResize">
+<meta property="twitter:description" content="Resize, compress, and convert images instantly with PixelResize. Privacy-first, browser-based image optimization.">
+<meta property="twitter:image" content="https://pixelresize.site/og-image.jpg">
+<!-- Preconnect -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://unpkg.com">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://unpkg.com/cropperjs@1.6.2/dist/cropper.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head> <body> <input type="file" id="file-input" accept="image/*" style="display: none;" aria-hidden="true"> <header class="header">
+    <nav class="container nav">
+      <a href="/" class="logo" aria-label="PixelResize Home">
+        <span class="logo-accent">Pixel</span>Resize
+      </a>
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/" id="home-link">Home</a></li>
+        <li><a href="#popular-tools" id="tools-link">Tools</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container">
+        <div class="hero-header">
+          <h1 id="hero-heading">Free Image Resizer Online – Resize, Compress & Convert Instantly</h1>
+          <p class="hero-subtitle">
+            Optimize your images for web and social media without losing quality. 100% private, browser-based processing for JPG, PNG, WebP, and AVIF.
+          </p>
+          <div class="trust-badges">
+            <span class="badge">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Free Forever
+            </span>
+            <span class="badge">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              Secure & Private
+            </span>
+            <span class="badge">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              No Upload Required
+            </span>
+          </div>
+        </div>   <div class="hero-grid single-col"> <!-- Upload Area --> <div class="hero-content" id="upload"> <div class="upload-card" id="drop-zone" role="button" aria-label="Upload image area" tabindex="0"> <div class="upload-placeholder" id="upload-placeholder"> <div class="upload-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> </div> <p class="upload-title">Drop your image here</p> <p class="upload-subtitle">or click to upload from your device</p> <button class="btn btn-primary btn-cta" id="select-btn" title="Click to select an image from your device">Select Image</button> </div> <div class="preview-container" id="preview-container" style="display: none;"> <img id="image-preview" src="" alt="Image Preview" loading="lazy"> <button class="btn-remove" id="remove-btn" aria-label="Remove image" title="Remove this image and start over">&times;</button> </div> </div> <div id="error-message" class="error-message hidden" role="alert"></div> </div>        <!-- Settings Panel -->
+        <div class="settings-section hidden" id="settings-section">
+          <div class="settings-card">
+            <!-- Top Tool Tabs -->
+            <div class="tool-tabs" id="tool-tabs">
+              <button class="tab-btn active" data-tab="resize">Resize</button>
+              <button class="tab-btn" data-tab="compress">Compress</button>
+              <button class="tab-btn" data-tab="crop">Crop</button>
+              <button class="tab-btn" data-tab="convert">Convert</button>
+              <button class="tab-btn" data-tab="target">Target</button>
+              <button class="tab-btn" data-tab="transform">Transform</button>
+            </div>
+
+            <div class="tool-content">
+              <!-- Resize Tab -->
+              <div class="tool-pane active" id="pane-resize">
+                <div class="control-group">
+                  <div class="input-row">
+                    <div class="input-field">
+                      <label for="input-width">Width (px)</label>
+                      <input type="number" id="input-width" placeholder="Width">
+                    </div>
+                    <div class="input-field">
+                      <label for="input-height">Height (px)</label>
+                      <input type="number" id="input-height" placeholder="Height">
+                    </div>
+                  </div>
+                  <div class="checkbox-field" style="margin-top: 12px;">
+                    <input type="checkbox" id="check-aspect" checked>
+                    <label for="check-aspect">Maintain Aspect Ratio</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Compress Tab -->
+              <div class="tool-pane" id="pane-compress">
+                <div class="control-group">
+                  <div class="range-container">
+                    <div class="range-header">
+                      <label>Compression Quality</label>
+                      <span id="quality-label" class="range-value">85%</span>
+                    </div>
+                    <input type="range" id="input-quality" min="1" max="100" value="85" class="range-field">
+                    <p class="text-muted" style="font-size: 0.75rem; margin-top: 8px;">Lower quality results in smaller file size.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Crop Tab -->
+              <div class="tool-pane" id="pane-crop">
+                <div class="control-group">
+                  <label>Aspect Ratio</label>
+                  <div class="chip-grid" id="crop-ratios">
+                    <button class="chip-btn active" data-ratio="NaN">Free</button>
+                    <button class="chip-btn" data-ratio="1">1:1</button>
+                    <button class="chip-btn" data-ratio="1.333">4:3</button>
+                    <button class="chip-btn" data-ratio="1.777">16:9</button>
+                  </div>
+                </div>
+                <!-- Crop Actions (Hidden until crop starts) -->
+                <div id="crop-actions" style="display: none; gap: 10px; margin-top: 10px;">
+                  <button class="btn btn-primary btn-full" id="crop-confirm-btn">Apply Crop</button>
+                  <button class="btn btn-secondary btn-full" id="crop-cancel-btn">Cancel</button>
+                </div>
+                <button class="btn btn-outline btn-full" id="crop-init-btn">Start Cropping</button>
+              </div>
+
+              <!-- Convert Tab -->
+              <div class="tool-pane" id="pane-convert">
+                <div class="control-group">
+                  <label>Output Format</label>
+                  <div class="chip-grid" id="format-chips">
+                    <button class="chip-btn active" data-format="image/jpeg">JPG</button>
+                    <button class="chip-btn" data-format="image/png">PNG</button>
+                    <button class="chip-btn" data-format="image/webp">WEBP</button>
+                    <button class="chip-btn" data-format="image/avif">AVIF</button>
+                    <button class="chip-btn" data-format="image/bmp">BMP</button>
+                    <button class="chip-btn" data-format="image/gif">GIF</button>
+                  </div>
+                  <!-- Hidden select for JS compatibility -->
+                  <select id="select-format" style="display: none;">
+                    <option value="image/jpeg">JPG</option>
+                    <option value="image/png">PNG</option>
+                    <option value="image/webp">WEBP</option>
+                    <option value="image/avif">AVIF</option>
+                    <option value="image/bmp">BMP</option>
+                    <option value="image/gif">GIF</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Target Tab -->
+              <div class="tool-pane" id="pane-target">
+                <div class="control-group">
+                  <label>Target File Size</label>
+                  <div class="chip-grid" id="target-presets">
+                    <button class="chip-btn" data-target="10">10KB</button>
+                    <button class="chip-btn" data-target="50">50KB</button>
+                    <button class="chip-btn active" data-target="100">100KB</button>
+                    <button class="chip-btn" data-target="200">200KB</button>
+                    <button class="chip-btn" data-target="500">500KB</button>
+                  </div>
+                  <p class="text-muted" style="font-size: 0.75rem; margin-top: 12px;">We'll automatically adjust quality to reach your target size.</p>
+                </div>
+              </div>
+
+              <!-- Transform Tab -->
+              <div class="tool-pane" id="pane-transform">
+                <div class="control-group">
+                  <label>Rotate & Flip</label>
+                  <div class="action-grid">
+                    <button class="btn btn-outline" id="rotate-left-btn" title="Rotate 90° CCW">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9c-2.52 0-4.93 1-6.74 2.74L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
+                      Rotate L
+                    </button>
+                    <button class="btn btn-outline" id="rotate-btn" title="Rotate 90° CW">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><polyline points="21 3 21 8 16 8"/></svg>
+                      Rotate R
+                    </button>
+                    <button class="btn btn-outline" id="flip-h-btn" title="Flip Horizontal">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="m2 8 4 4-4 4"/><path d="m22 8-4 4 4 4"/></svg>
+                      Flip H
+                    </button>
+                    <button class="btn btn-outline" id="flip-v-btn" title="Flip Vertical">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="m8 2 4 4 4-4"/><path d="m8 22 4-4 4 4"/></svg>
+                      Flip V
+                    </button>
+                    <button class="btn btn-outline" id="base64-btn" title="Copy Base64" style="grid-column: span 2;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                      Copy Base64 String
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Common Settings (EXIF) -->
+              <div class="control-group" style="border-top: 1px solid var(--border); padding-top: 20px;">
+                <div class="checkbox-field">
+                  <input type="checkbox" id="check-metadata" checked>
+                  <label for="check-metadata">Remove EXIF Metadata</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Info Bar Summary -->
+            <div class="info-bar-summary" id="info-bar-summary">
+              <div class="summary-item">Original: <span id="size-original" class="summary-badge">0 KB</span></div>
+              <div class="summary-item">Estimated: <span id="size-estimated" class="summary-badge">0 KB</span></div>
+              <div class="summary-item">Format: <span id="summary-format" class="summary-badge">JPG</span></div>
+              <div class="summary-item">Quality: <span id="summary-quality" class="summary-badge">85%</span></div>
+            </div>
+
+            <!-- Action Footer -->
+            <div class="action-footer">
+              <button class="btn btn-primary btn-full" id="resize-btn">Apply Resize</button>
+              <button class="btn btn-secondary btn-full" id="download-btn" disabled>Download Image</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular Tools Section -->
+    <section class="container tools-section" id="popular-tools">
+      <div class="section-header">
+        <h2>Popular Image Tools</h2>
+        <p>Fast, free, and secure tools for all your image optimization needs.</p>
+      </div>
+      <div class="tools-grid">
+        <article class="tool-card">
+          <a href="/?tool=resize">
+            <div class="tool-icon" aria-hidden="true">🖼️</div>
+            <h3>Image Resizer</h3>
+            <p>Change dimensions in pixels or percentage instantly.</p>
+          </a>
+        </article>
+        <article class="tool-card">
+          <a href="/?tool=compress">
+            <div class="tool-icon" aria-hidden="true">📉</div>
+            <h3>Image Compressor</h3>
+            <p>Reduce file size while maintaining visual quality.</p>
+          </a>
+        </article>
+        <article class="tool-card">
+          <a href="/?tool=convert&format=webp">
+            <div class="tool-icon" aria-hidden="true">🌐</div>
+            <h3>JPG to WebP</h3>
+            <p>Convert to modern WebP for better web performance.</p>
+          </a>
+        </article>
+        <article class="tool-card">
+          <a href="/?tool=crop">
+            <div class="tool-icon" aria-hidden="true">✂️</div>
+            <h3>Image Crop</h3>
+            <p>Perfectly frame your photos for social media.</p>
+          </a>
+        </article>
+        <article class="tool-card">
+          <a href="/?tool=convert&format=jpg">
+            <div class="tool-icon" aria-hidden="true">📸</div>
+            <h3>HEIC to JPG</h3>
+            <p>Convert iPhone photos to standard JPG format.</p>
+          </a>
+        </article>
+        <article class="tool-card">
+          <a href="/?tool=resize&preset=passport">
+            <div class="tool-icon" aria-hidden="true">🆔</div>
+            <h3>Passport Photo</h3>
+            <p>Resize photos to official passport dimensions.</p>
+          </a>
+        </article>
+        <article class="tool-card">
+          <a href="/?tool=resize&preset=discord">
+            <div class="tool-icon" aria-hidden="true">🎮</div>
+            <h3>Discord PFP</h3>
+            <p>Get the perfect size for your Discord avatar.</p>
+          </a>
+        </article>
+        <article class="tool-card">
+          <a href="/?tool=convert&format=jpg">
+            <div class="tool-icon" aria-hidden="true">♻️</div>
+            <h3>PNG to JPG</h3>
+            <p>Convert transparent PNGs to optimized JPGs.</p>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="container" id="how-it-works">
+      <div class="section-header">
+        <h2>How It Works</h2>
+        <p>Optimize your images in three simple steps.</p>
+      </div>
+      <div class="tools-grid">
+        <div class="tool-card" style="text-align: center; padding: 40px;">
+          <div class="tool-icon" style="margin: 0 auto 20px;">1</div>
+          <h3>Upload Image</h3>
+          <p>Drag and drop or select an image from your device. No files are uploaded to our servers.</p>
+        </div>
+        <div class="tool-card" style="text-align: center; padding: 40px;">
+          <div class="tool-icon" style="margin: 0 auto 20px;">2</div>
+          <h3>Adjust Settings</h3>
+          <p>Set your desired dimensions, format, and quality. Preview the estimated file size in real-time.</p>
+        </div>
+        <div class="tool-card" style="text-align: center; padding: 40px;">
+          <div class="tool-icon" style="margin: 0 auto 20px;">3</div>
+          <h3>Download</h3>
+          <p>Click 'Apply Changes' and download your optimized image instantly to your device.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits / Trust Section -->
+    <section class="container trust-authority" id="benefits">
+      <div class="section-header">
+        <h2>Why Choose PixelResize?</h2>
+        <p>The most secure and efficient way to optimize images online.</p>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <h3>Privacy First</h3>
+          <p>All processing happens locally in your browser. Your images never leave your computer.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>No Limits</h3>
+          <p>Resize and compress as many images as you want. No subscriptions or hidden fees.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>Lightning Fast</h3>
+          <p>Zero upload time. Instant processing using your device's local power.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>SEO Optimized</h3>
+          <p>Improve your website's Core Web Vitals with perfectly optimized next-gen images.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO Content Section -->
+    <section class="container seo-block" id="about">
+      <h2>Professional Image Resizer Online Free</h2>
+      <p>
+        PixelResize is a powerful <strong>image resizer online free</strong> tool that lets you resize images without losing quality. 
+        Whether you need to compress images to exact sizes like 50KB or 100KB, or convert formats including JPG, PNG, WebP, and AVIF, 
+        our tool provides a professional-grade solution directly in your browser.
+      </p>
+      <h3>Key Features</h3>
+      <ul>
+        <li><strong>Resize by Pixels or Percentage:</strong> Full control over your image dimensions.</li>
+        <li><strong>Format Conversion:</strong> Convert instantly between JPG, PNG, WebP, and AVIF.</li>
+        <li><strong>Smart Compression:</strong> Reduce file size while maintaining visual fidelity.</li>
+        <li><strong>Bulk Processing:</strong> Optimized for speed and efficiency.</li>
+      </ul>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="container faq-section" id="faq">
+      <div class="section-header">
+        <h2>Frequently Asked Questions</h2>
+        <p>Everything you need to know about resizing and optimizing images.</p>
+      </div>
+      <div class="faq-container">
+        <div class="faq-item">
+          <h3>How can I resize an image online for free?</h3>
+          <p>Simply upload your image to PixelResize, set your desired dimensions, and click download. It's 100% free and requires no registration.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is it safe to upload my images to PixelResize?</h3>
+          <p>Yes! PixelResize uses browser-based processing, meaning your images are never uploaded to our servers. They stay on your device throughout the entire process.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Does resizing an image reduce its quality?</h3>
+          <p>Our tool uses advanced resampling algorithms to ensure your images remain as sharp as possible. However, significant upscaling may result in some loss of clarity.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What is the best format for web images?</h3>
+          <p>WebP and AVIF are generally the best formats for the web as they offer superior compression compared to JPG and PNG.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="container blog-section" id="blog">
+      <div class="section-header">
+        <h2>Image Optimization Guides</h2>
+        <p>Expert tips on how to optimize your visuals for the modern web.</p>
+      </div>
+      <div class="blog-grid">
+        <article class="blog-card">
+          <h3><a href="/blog/how-to-resize-images-online/">How to Resize Images Online</a></h3>
+          <p>A complete guide to resizing images for any platform without losing quality.</p>
+          <a class="read-more" href="/blog/how-to-resize-images-online/">Read More →</a>
+        </article>
+        <article class="blog-card">
+          <h3><a href="/blog/best-image-format-for-websites/">Best Image Format for Websites</a></h3>
+          <p>WebP vs PNG vs JPG: Which one should you choose for your next project?</p>
+          <a class="read-more" href="/blog/best-image-format-for-websites/">Read More →</a>
+        </article>
+        <article class="blog-card">
+          <h3><a href="/blog/seo-image-optimization-guide/">SEO Image Optimization Guide</a></h3>
+          <p>How to rank higher in Google Image Search with optimized assets.</p>
+          <a class="read-more" href="/blog/seo-image-optimization-guide/">Read More →</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-col" style="flex: 2;">
+        <h3>PixelResize</h3>
+        <p>A privacy-focused platform for fast, secure, and free image optimization. All processing happens locally in your browser.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Image Tools</h4>
+        <ul>
+          <li><a href="/tools/image-resizer">Image Resizer</a></li>
+          <li><a href="/tools/image-compressor">Image Compressor</a></li>
+          <li><a href="/tools/crop-image">Image Crop</a></li>
+          <li><a href="/tools/jpg-to-webp">JPG to WebP</a></li>
+          <li><a href="/tools/png-to-jpg">PNG to JPG</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Utility</h4>
+        <ul>
+          <li><a href="/heic-to-jpg">HEIC to JPG</a></li>
+          <li><a href="/resize-passport-photo">Passport Photo</a></li>
+          <li><a href="/discord-pfp-resizer">Discord PFP</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 PixelResize. All rights reserved.</p>
+      <p class="footer-note">Images are processed locally in your browser. No data is stored or uploaded.</p>
+    </div>
+  </footer>
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "PixelResize",
+    "url": "https://pixelresize.site/"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "PixelResize",
+    "url": "https://pixelresize.site/",
+    "logo": "https://pixelresize.site/logo.png"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PixelResize",
+    "operatingSystem": "All",
+    "applicationCategory": "MultimediaApplication",
+    "url": "https://pixelresize.site/",
+    "description": "Free browser-based image resizer and converter. Privacy-first tool to resize, compress, and convert JPG, PNG, WebP, and AVIF images locally.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How can I resize an image online for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can resize images using our free online image resizer. Upload your image, set your desired dimensions, and download the optimized version instantly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is PixelResize safe to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, PixelResize is 100% safe. All image processing happens locally in your browser, meaning your files are never uploaded to our servers."
+        }
+      }
+    ]
+  }
+]
+</script>
+<!-- TOOL SWITCH CONFIRMATION MODAL -->
+<div id="toolSwitchModal" class="modal-overlay">
+  <div class="modal-box">
+    <h3>Start New Image Task?</h3>
+    <p>
+      You already have an active image session.<br><br>
+      Do you want to cancel it and upload a new image for the selected tool?
+    </p>
+
+    <div class="modal-actions">
+      <button id="continueBtn" class="btn-secondary">
+        Continue Editing
+      </button>
+      <button id="confirmSwitchBtn" class="btn-primary">
+        Upload New Image
+      </button>
+    </div>
+  </div>
+</div>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2486732565949048" crossorigin="anonymous"></script>
+<script type="module" src="script.js" defer></script>
+</body>
+</html>
+
+
+<script type="module" src="script.js" defer></script> </body> </html>

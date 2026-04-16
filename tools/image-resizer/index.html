@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Online Image Resizer - Resize Images Instantly | PixelResize</title>
+    <meta name="description" content="Resize images online for free with PixelResize. Fast browser-based image resizer. No upload required, 100% private and secure.">
+    <link rel="canonical" href="https://pixelresize.site/tools/image-resizer">
+    
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com">
+
+    <style>
+        :root { --primary: #4F46E5; --primary-hover: #4338CA; --background: #F8FAFC; --text-main: #111827; --text-muted: #64748B; --white: #FFFFFF; --border: #E2E8F0; --radius: 16px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--background); color: var(--text-main); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .header { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; height: 72px; display: flex; align-items: center; }
+        .nav { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--text-main); text-decoration: none; letter-spacing: -0.02em; }
+        .logo-accent { color: var(--primary); }
+        .nav-links { display: flex; list-style: none; gap: 24px; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--primary); }
+        
+        .hero { padding: 60px 0; text-align: center; }
+        .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.03em; }
+        .hero-title-black { color: #000; }
+        .hero-title-gradient { background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { font-size: 1.25rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 32px; }
+
+        .footer { background: var(--white); border-top: 1px solid var(--border); padding: 40px 0; text-align: center; margin-top: 60px; }
+        .footer p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px; }
+        .footer a { color: var(--primary); text-decoration: none; }
+    </style>
+
+    <link rel="stylesheet" href="../../styles.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://unpkg.com/cropperjs@1.6.2/dist/cropper.min.css" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+</head>
+<body>
+    <input type="file" id="file-input" accept="image/*" style="display: none;" aria-hidden="true">
+    <header class="header">
+        <nav class="container nav">
+            <a href="/" class="logo"><span class="logo-accent">Pixel</span>Resize</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1><span class="hero-title-black">Free Online Image</span> <span class="hero-title-gradient">Resizer</span></h1>
+                <p class="hero-subtitle">Resize your images to any dimension in seconds. Fast, free, and secure.</p>
+
+                <div class="hero-grid single-col">
+                    <!-- Upload Area -->
+                    <div class="hero-content" id="upload">
+                        <div class="upload-card" id="drop-zone" role="button" aria-label="Upload image area" tabindex="0">
+                            <div class="upload-placeholder" id="upload-placeholder">
+                                <div class="upload-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                </div>
+                                <p class="upload-title">Drop your image here</p>
+                                <p class="upload-subtitle">or click to upload from your device</p>
+                                <button class="btn btn-primary btn-cta" id="select-btn">Select Image</button>
+                            </div>
+                            <div class="preview-container" id="preview-container" style="display: none;">
+                                <img id="image-preview" src="" alt="Image Preview" loading="lazy">
+                                <button class="btn-remove" id="remove-btn" aria-label="Remove image">&times;</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Panel -->
+                    <div class="settings-section hidden" id="settings-section">
+                        <div class="settings-card">
+                            <h3>Image Resizer Tool</h3>
+                            
+                            <div class="control-group">
+                                <label>Dimensions</label>
+                                <div class="input-row">
+                                    <div class="input-field">
+                                        <span>Width (px)</span>
+                                        <input type="number" id="input-width" placeholder="Width">
+                                    </div>
+                                    <div class="input-field">
+                                        <span>Height (px)</span>
+                                        <input type="number" id="input-height" placeholder="Height">
+                                    </div>
+                                </div>
+                                <div class="checkbox-field">
+                                    <input type="checkbox" id="check-aspect" checked>
+                                    <label for="check-aspect">Maintain Aspect Ratio</label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label>Format</label>
+                                <select id="select-format" class="select-field">
+                                    <option value="image/jpeg">JPG</option>
+                                    <option value="image/png">PNG</option>
+                                    <option value="image/webp">WEBP</option>
+                                    <option value="image/avif">AVIF</option>
+                                    <option value="image/bmp">BMP</option>
+                                </select>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="label-row">
+                                    <label>Quality</label>
+                                    <span id="quality-label">85%</span>
+                                </div>
+                                <input type="range" id="input-quality" min="1" max="100" value="85" class="range-field">
+                            </div>
+
+                            <div class="info-panel">
+                                <div class="info-item">
+                                    <span>Original Size:</span>
+                                    <strong id="size-original">0 KB</strong>
+                                </div>
+                                <div class="info-item">
+                                    <span>Estimated Size:</span>
+                                    <strong id="size-estimated" class="text-primary">0 KB</strong>
+                                </div>
+                            </div>
+
+                            <div class="action-buttons">
+                                <button class="btn btn-primary btn-full" id="resize-btn">Apply Changes</button>
+                                <button class="btn btn-secondary btn-full" id="download-btn" disabled>Download Image</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container content-expansion">
+            <h2>How to Use the Image Resizer</h2>
+            <p>Our online image resizer is designed to be fast, simple, and private. Follow these steps to resize your images in seconds:</p>
+            <ol>
+                <li><strong>Upload:</strong> Drag and drop your image into the upload area or click the "Select Image" button to browse your device.</li>
+                <li><strong>Configure:</strong> Enter your desired width and height in pixels. By default, the aspect ratio is locked to prevent your image from looking stretched.</li>
+                <li><strong>Select Format:</strong> Choose your preferred output format. You can convert your image to WebP, JPG, or PNG while resizing.</li>
+                <li><strong>Apply:</strong> Click "Apply Changes" to see the estimated file size.</li>
+                <li><strong>Download:</strong> Once you're happy with the settings, click "Download Image" to save the optimized file to your device.</li>
+            </ol>
+
+            <h2 style="margin-top: 40px;">Why Use PixelResize?</h2>
+            <ul>
+                <li><strong>100% Private:</strong> Your images are processed locally in your browser. They are never uploaded to our servers, ensuring your data stays yours.</li>
+                <li><strong>Fast & Free:</strong> No registration, no software downloads, and no hidden fees. Just fast image tools.</li>
+                <li><strong>High Quality:</strong> We use advanced resampling algorithms to ensure your images stay sharp even after resizing.</li>
+                <li><strong>SEO Optimized:</strong> Properly sized images improve your website's load speed and Core Web Vitals, helping you rank higher in search results.</li>
+            </ul>
+    </main>
+
+<footer class="footer">
+    <div class="container footer-container">
+        <div class="footer-col" style="flex: 2;">
+            <h3>PixelResize</h3>
+            <p>A privacy-focused platform for fast, secure, and free image optimization. All processing happens locally in your browser.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Image Tools</h4>
+            <ul>
+                <li><a href="/tools/image-resizer">Image Resizer</a></li>
+                <li><a href="/tools/image-compressor">Image Compressor</a></li>
+                <li><a href="/tools/crop-image">Image Crop</a></li>
+                <li><a href="/tools/jpg-to-webp">JPG to WebP</a></li>
+                <li><a href="/tools/png-to-jpg">PNG to JPG</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Legal</h4>
+            <ul>
+                <li><a href="/privacy">Privacy Policy</a></li>
+                <li><a href="/terms">Terms of Service</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 PixelResize. All rights reserved.</p>
+        <p class="footer-note">Images are processed locally in your browser. No data is stored or uploaded.</p>
+    </div>
+</footer>
+<p style="font-size:12px; text-align:center; color:#94a3b8;">
+PixelResize is built for privacy-first image optimization. No data is stored or tracked.
+</p>
+
+    <script type="module" src="../../script.js" defer></script>
+</body>
+</html>

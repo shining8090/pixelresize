@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Online JPG to WebP Converter - Convert JPG to WebP Instantly | PixelResize</title>
+    <meta name="description" content="Convert JPG to WebP online for free with PixelResize. Optimize your images for the web with the latest next-gen format. Fast, free, and secure.">
+    <link rel="canonical" href="https://pixelresize.site/tools/jpg-to-webp">
+    
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com">
+
+    <link rel="stylesheet" href="../../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <input type="file" id="file-input" accept="image/*" style="display: none;" aria-hidden="true">
+    <header class="header">
+        <nav class="container nav">
+            <a href="/" class="logo"><span class="logo-accent">Pixel</span>Resize</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Free Online <span class="hero-title-gradient">JPG to WebP</span> Converter</h1>
+                <p class="hero-subtitle">Convert your JPG images to modern WebP format instantly. Improve your website speed and performance.</p>
+                
+                <div class="hero-grid single-col">
+                    <div class="hero-content" id="upload">
+                        <div class="upload-card" id="drop-zone" role="button" tabindex="0">
+                            <div class="upload-placeholder" id="upload-placeholder">
+                                <div class="upload-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                </div>
+                                <p class="upload-title">Drop your JPG here</p>
+                                <p class="upload-subtitle">or click to upload</p>
+                                <button class="btn btn-primary btn-cta" id="select-btn">Select JPG</button>
+                            </div>
+                            <div class="preview-container" id="preview-container" style="display: none;">
+                                <img id="image-preview" src="" alt="Image Preview">
+                                <button class="btn-remove" id="remove-btn">&times;</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-section hidden" id="settings-section">
+                        <div class="settings-card">
+                            <h3>Convert to WebP</h3>
+                            <div class="control-group">
+                                <label>Output Format</label>
+                                <select id="select-format" class="select-field">
+                                    <option value="image/webp" selected>WEBP (Recommended for Web)</option>
+                                    <option value="image/jpeg">JPG</option>
+                                    <option value="image/png">PNG</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <div class="label-row">
+                                    <label>Quality</label>
+                                    <span id="quality-label">80%</span>
+                                </div>
+                                <input type="range" id="input-quality" min="1" max="100" value="80" class="range-field">
+                            </div>
+                            <div class="info-panel">
+                                <div class="info-item"><span>Original:</span> <strong id="size-original">0 KB</strong></div>
+                                <div class="info-item"><span>Estimated:</span> <strong id="size-estimated" class="text-primary">0 KB</strong></div>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="btn btn-primary btn-full" id="resize-btn">Convert Now</button>
+                                <button class="btn btn-secondary btn-full" id="download-btn" disabled>Download WebP</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container content-expansion">
+            <h2>Why Convert JPG to WebP?</h2>
+            <p>WebP is a modern image format developed by Google that provides superior lossless and lossy compression for images on the web. Using WebP, webmasters and web developers can create smaller, richer images that make the web faster.</p>
+            <ul>
+                <li><strong>Smaller files:</strong> WebP lossy images are 25-34% smaller than comparable JPG images.</li>
+                <li><strong>Better SEO:</strong> Faster images lead to better Core Web Vitals and higher search rankings.</li>
+                <li><strong>Transparency:</strong> WebP supports transparency (alpha channel) while maintaining small sizes.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col" style="flex: 2;">
+                <h3>PixelResize</h3>
+                <p>A privacy-focused platform for fast, secure, and free image optimization.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="/privacy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 PixelResize. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="../../script.js" defer></script>
+</body>
+</html>

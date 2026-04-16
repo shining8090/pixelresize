@@ -1,0 +1,5 @@
+{
+  "name": "PixelResize",
+  "description": "Free browser-based image resizer and converter supporting JPG, PNG, WebP, AVIF and BMP formats. Resize, compress and convert images instantly.",
+  "requestFramePermissions": []
+}
