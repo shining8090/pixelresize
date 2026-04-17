@@ -575,20 +575,38 @@ if (dropZone) {
     const navLinks = document.getElementById('nav-links');
 
     if (mobileMenuToggle && navLinks) {
-        mobileMenuToggle.addEventListener('click', () => {
-            const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
-            mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
-            mobileMenuToggle.classList.toggle('open');
-            navLinks.classList.toggle('active');
-        });
+        // Create backdrop if it doesn't exist
+        let backdrop = document.getElementById('menu-backdrop');
+        if (!backdrop) {
+            backdrop = document.createElement('div');
+            backdrop.id = 'menu-backdrop';
+            backdrop.className = 'menu-backdrop';
+            document.body.appendChild(backdrop);
+        }
+
+        const toggleMenu = (forceClose = false) => {
+            const isOpen = forceClose ? true : mobileMenuToggle.classList.contains('open');
+            if (isOpen || forceClose) {
+                mobileMenuToggle.classList.remove('open');
+                navLinks.classList.remove('active');
+                backdrop.classList.remove('active');
+                document.body.style.overflow = '';
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            } else {
+                mobileMenuToggle.classList.add('open');
+                navLinks.classList.add('active');
+                backdrop.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                mobileMenuToggle.setAttribute('aria-expanded', 'true');
+            }
+        };
+
+        mobileMenuToggle.addEventListener('click', () => toggleMenu());
+        backdrop.addEventListener('click', () => toggleMenu(true));
 
         // Close menu when clicking a link
         navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenuToggle.classList.remove('open');
-                mobileMenuToggle.setAttribute('aria-expanded', 'false');
-                navLinks.classList.remove('active');
-            });
+            link.addEventListener('click', () => toggleMenu(true));
         });
     }
 
@@ -620,7 +638,7 @@ if (dropZone) {
         anchor.addEventListener('click', function (e) {
             // Close mobile menu if open
             if (navLinks) navLinks.classList.remove('active');
-            if (mobileMenuToggle) mobileMenuToggle.classList.remove('active');
+            if (mobileMenuToggle) mobileMenuToggle.classList.remove('open');
 
             if (this.id === 'home-link') {
                 e.preventDefault();
