@@ -8,18 +8,6 @@
       <image:title>PixelResize - Free Online Image Resizer &amp; Converter</image:title>
       <image:caption>Resize, compress, and convert images instantly in your browser.</image:caption>
     </image:image>
-    <image:image>
-      <image:loc>https://pixelresize.site/apple-touch-icon.png</image:loc>
-      <image:title>PixelResize Icon</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://pixelresize.site/android-chrome-192x192.png</image:loc>
-      <image:title>PixelResize Android Icon 192x192</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://pixelresize.site/android-chrome-512x512.png</image:loc>
-      <image:title>PixelResize Android Icon 512x512</image:title>
-    </image:image>
   </url>
   <url>
     <loc>https://pixelresize.site/tools/image-resizer</loc>
@@ -36,7 +24,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://pixelresize.site/tools/heic-to-jpg</loc>
+    <loc>https://pixelresize.site/heic-to-jpg</loc>
     <image:image>
       <image:loc>https://pixelresize.site/og-image.jpg</image:loc>
       <image:title>HEIC to JPG Converter</image:title>
@@ -47,13 +35,6 @@
     <image:image>
       <image:loc>https://pixelresize.site/og-image.jpg</image:loc>
       <image:title>Passport Photo Resizer</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://pixelresize.site/compress-image-for-whatsapp</loc>
-    <image:image>
-      <image:loc>https://pixelresize.site/og-image.jpg</image:loc>
-      <image:title>WhatsApp Image Compressor</image:title>
     </image:image>
   </url>
   <url>

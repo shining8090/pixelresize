@@ -3,9 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Online Image Compressor - Compress Images Without Losing Quality | PixelResize</title>
-    <meta name="description" content="Compress images online for free with PixelResize. Reduce file size of JPG, PNG, and WebP images instantly. No upload required, 100% private.">
+    <title>Compress Image Online - Reduce File Size to 50KB, 100KB | PixelResize</title>
+    <meta name="description" content="Free online image compressor. Reduce image file size to 50KB or 100KB without quality loss. All processing happens locally in your browser. Fast, free, and secure.">
     <link rel="canonical" href="https://pixelresize.site/tools/image-compressor">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://pixelresize.site/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Image Compressor",
+        "item": "https://pixelresize.site/tools/image-compressor"
+      }]
+    }
+    </script>
     
     <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +43,7 @@
         .nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 500; transition: color 0.2s; }
         .nav-links a:hover { color: var(--primary); }
         
-        .hero { padding: 60px 0; text-align: center; }
+        .hero { padding: 100px 24px 80px; text-align: center; }
         .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.03em; }
         .hero-title-black { color: #000; }
         .hero-title-gradient { background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -139,6 +157,41 @@
                 <li><strong>Better SEO:</strong> Google rewards fast-loading websites with higher rankings.</li>
                 <li><strong>Mobile Friendly:</strong> Optimized images save data for your mobile users.</li>
             </ul>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="container faq-section" id="faq" itemscope itemtype="https://schema.org/FAQPage" style="padding-top: 60px; border-top: 1px solid var(--border); margin-top: 60px;">
+            <div class="section-header" style="text-align: center; margin-bottom: 40px;">
+                <h2 style="font-size: 2rem; margin-bottom: 12px;">Frequently Asked Questions</h2>
+                <p style="color: var(--text-muted);">Common questions about image compression.</p>
+            </div>
+            <div class="faq-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <h3 itemprop="name" style="font-size: 1.1rem; margin-bottom: 12px; font-weight: 600;">Does compression affect image quality?</h3>
+                    <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text" style="color: var(--text-muted); font-size: 0.95rem;">Lossy compression reduces file size by removing unnoticeable data. At 85% quality, most users cannot distinguish the compressed image from the original.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <h3 itemprop="name" style="font-size: 1.1rem; margin-bottom: 12px; font-weight: 600;">How much can I reduce my file size?</h3>
+                    <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text" style="color: var(--text-muted); font-size: 0.95rem;">Typically, you can reduce file sizes by 50-80% without significant visual loss, especially when converting to formats like WebP or AVIF.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <h3 itemprop="name" style="font-size: 1.1rem; margin-bottom: 12px; font-weight: 600;">Is this tool free to use?</h3>
+                    <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text" style="color: var(--text-muted); font-size: 0.95rem;">Yes, PixelResize is completely free for all users. There are no limits on the number of images you can compress.</p>
+                    </div>
+                </div>
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <h3 itemprop="name" style="font-size: 1.1rem; margin-bottom: 12px; font-weight: 600;">Can I compress PNG images?</h3>
+                    <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text" style="color: var(--text-muted); font-size: 0.95rem;">Yes, you can compress PNGs. For better compression while maintaining transparency, we recommend converting PNG to WebP.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
 <footer class="footer">

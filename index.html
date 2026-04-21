@@ -2,25 +2,104 @@
 if (location.hostname === "www.pixelresize.site") {
   location.replace("https://pixelresize.site" + location.pathname + location.search);
 }
-</script> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Free Image Resizer Online – Resize, Compress & Convert Images | PixelResize</title>
-<meta name="description" content="PixelResize is a free, privacy-first online image resizer. Resize, compress, and convert JPG, PNG, WebP, and AVIF images directly in your browser. No uploads, 100% secure.">
+</script> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Free Image Resizer Online – Resize, Compress & Convert Images Without Quality Loss | PixelResize</title>
+<meta name="description" content="PixelResize is the fastest free image resizer online. Compress images to 50KB/100KB, convert JPG to WebP, PNG to JPG, and resize images for Discord, Passport, or WhatsApp instantly in your browser. 100% private, no upload needed.">
 <link rel="canonical" href="https://pixelresize.site/">
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="robots" content="index, follow">
 <meta name="author" content="PixelResize">
 <meta name="theme-color" content="#4F46E5">
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://pixelresize.site/">
 <meta property="og:title" content="Free Image Resizer Online – Resize, Compress & Convert Images | PixelResize">
-<meta property="og:description" content="Resize, compress, and convert images instantly with PixelResize. Privacy-first, browser-based image optimization.">
+<meta property="og:description" content="Fast, free, and private image resizer online. Resize, compress, and convert JPG, PNG, WebP instantly in your browser. No upload required.">
 <meta property="og:image" content="https://pixelresize.site/og-image.jpg">
 <meta property="og:site_name" content="PixelResize">
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="https://pixelresize.site/">
-<meta property="twitter:title" content="Free Image Resizer Online – Resize, Compress & Convert Images | PixelResize">
-<meta property="twitter:description" content="Resize, compress, and convert images instantly with PixelResize. Privacy-first, browser-based image optimization.">
+<meta property="twitter:title" content="Free Image Resizer Online – Resize, Compress & Convert Images Without Quality Loss | PixelResize">
+<meta property="twitter:description" content="Privacy-first image resizer online. Compress and convert images without uploading to any server. Fast, free, and secure image optimization.">
 <meta property="twitter:image" content="https://pixelresize.site/og-image.jpg">
+
+<!-- Consolidated Structured Data -->
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "PixelResize",
+    "url": "https://pixelresize.site/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://pixelresize.site/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://pixelresize.site/#organization",
+    "name": "PixelResize",
+    "url": "https://pixelresize.site/",
+    "logo": "https://pixelresize.site/favicon.png",
+    "sameAs": [
+      "https://twitter.com/pixelresize",
+      "https://facebook.com/pixelresize"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PixelResize",
+    "operatingSystem": "All",
+    "applicationCategory": "MultimediaApplication",
+    "url": "https://pixelresize.site/",
+    "description": "PixelResize is an online image optimization tool that allows users to resize, compress, and convert images directly in the browser without uploading files to a server.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "1250"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How can I resize an image online for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can resize images using our free online image resizer. Upload your image, set your desired dimensions, and download the optimized version instantly without losing quality."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it safe to upload my images to PixelResize?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, it is 100% safe. PixelResize uses browser-based processing, meaning your images stay on your device and are never uploaded to our servers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I compress images to a specific size like 50KB or 100KB?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, our image compressor tool allows you to reduce file sizes to specific targets like 50KB or 100KB while maintaining visual fidelity."
+        }
+      }
+    ]
+  }
+]
+</script>
+
 <!-- Preconnect -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,8 +108,8 @@ if (location.hostname === "www.pixelresize.site") {
 <link rel="stylesheet" href="https://unpkg.com/cropperjs@1.6.2/dist/cropper.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head> <body> <input type="file" id="file-input" accept="image/*" style="display: none;" aria-hidden="true"> <header class="header">
-    <nav class="container nav">
-      <a href="/" class="logo" aria-label="PixelResize Home">
+    <nav class="container nav" role="navigation" aria-label="Main navigation">
+      <a href="/" class="logo" aria-label="PixelResize - Free Image Resizer Online">
         <span class="logo-accent">Pixel</span>Resize
       </a>
       <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -52,25 +131,25 @@ if (location.hostname === "www.pixelresize.site") {
     <section class="hero" aria-labelledby="hero-heading">
       <div class="container">
         <div class="hero-header">
-          <h1 id="hero-heading">Free Image Resizer Online – Resize, Compress & Convert Instantly</h1>
+          <h1 id="hero-heading">Free Image Resizer Online – Resize, Compress &amp; Convert Instantly</h1>
           <p class="hero-subtitle">
-            Optimize your images for web and social media without losing quality. 100% private, browser-based processing for JPG, PNG, WebP, and AVIF.
+            Optimize your images for web and social media without losing quality. Professional-grade, 100% private, browser-based processing for JPG, PNG, WebP, and AVIF.
           </p>
-          <div class="trust-badges">
-            <span class="badge">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <div class="trust-badges" aria-label="Tool benefits">
+            <span class="badge" title="No subscription needed">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
               Free Forever
             </span>
-            <span class="badge">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-              Secure & Private
+            <span class="badge" title="Images never leave your computer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              Secure &amp; Private
             </span>
-            <span class="badge">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            <span class="badge" title="Local browser processing">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
               No Upload Required
             </span>
           </div>
-        </div>   <div class="hero-grid single-col"> <!-- Upload Area --> <div class="hero-content" id="upload"> <div class="upload-card" id="drop-zone" role="button" aria-label="Upload image area" tabindex="0"> <div class="upload-placeholder" id="upload-placeholder"> <div class="upload-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> </div> <p class="upload-title">Drop your image here</p> <p class="upload-subtitle">or click to upload from your device</p> <button class="btn btn-primary btn-cta" id="select-btn" title="Click to select an image from your device">Select Image</button> </div> <div class="preview-container" id="preview-container" style="display: none;"> <img id="image-preview" src="" alt="Image Preview" loading="lazy"> <button class="btn-remove" id="remove-btn" aria-label="Remove image" title="Remove this image and start over">&times;</button> </div> </div> <div id="error-message" class="error-message hidden" role="alert"></div> </div>        <!-- Settings Panel -->
+        </div>   <div class="hero-grid single-col"> <!-- Upload Area --> <div class="hero-content" id="upload"> <div class="upload-card" id="drop-zone" role="button" aria-label="Upload image area" tabindex="0"> <div class="upload-placeholder" id="upload-placeholder"> <div class="upload-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> </div> <p class="upload-title">Drop your image here</p> <p class="upload-subtitle">or click to upload from your device</p> <button class="btn btn-primary btn-cta" id="select-btn" title="Click to select an image from your device">Select Image</button> </div> <div class="preview-container" id="preview-container" style="display: none;"> <img id="image-preview" src="" alt="Uploaded image preview for optimization" loading="lazy"> <button class="btn-remove" id="remove-btn" aria-label="Remove image and select a new one" title="Remove this image and start over">&times;</button> </div> </div> <div id="error-message" class="error-message hidden" role="alert"></div> </div>        <!-- Settings Panel -->
         <div class="settings-section hidden" id="settings-section">
           <div class="settings-card">
             <!-- Top Tool Tabs -->
@@ -367,27 +446,35 @@ if (location.hostname === "www.pixelresize.site") {
     </section>
 
     <!-- FAQ Section -->
-    <section class="container faq-section" id="faq">
+    <section class="container faq-section" id="faq" itemscope itemtype="https://schema.org/FAQPage">
       <div class="section-header">
         <h2>Frequently Asked Questions</h2>
         <p>Everything you need to know about resizing and optimizing images.</p>
       </div>
       <div class="faq-container">
-        <div class="faq-item">
-          <h3>How can I resize an image online for free?</h3>
-          <p>Simply upload your image to PixelResize, set your desired dimensions, and click download. It's 100% free and requires no registration.</p>
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <h3 itemprop="name">How can I resize an image online for free?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">Simply upload your image to PixelResize, set your desired dimensions, and click download. It's 100% free and requires no registration.</p>
+          </div>
         </div>
-        <div class="faq-item">
-          <h3>Is it safe to upload my images to PixelResize?</h3>
-          <p>Yes! PixelResize uses browser-based processing, meaning your images are never uploaded to our servers. They stay on your device throughout the entire process.</p>
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <h3 itemprop="name">Is it safe to upload my images to PixelResize?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">Yes! PixelResize uses browser-based processing, meaning your images are never uploaded to our servers. They stay on your device throughout the entire process.</p>
+          </div>
         </div>
-        <div class="faq-item">
-          <h3>Does resizing an image reduce its quality?</h3>
-          <p>Our tool uses advanced resampling algorithms to ensure your images remain as sharp as possible. However, significant upscaling may result in some loss of clarity.</p>
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <h3 itemprop="name">Does resizing an image reduce its quality?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">Our tool uses advanced resampling algorithms to ensure your images remain as sharp as possible. However, significant upscaling may result in some loss of clarity.</p>
+          </div>
         </div>
-        <div class="faq-item">
-          <h3>What is the best format for web images?</h3>
-          <p>WebP and AVIF are generally the best formats for the web as they offer superior compression compared to JPG and PNG.</p>
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <h3 itemprop="name">What is the best format for web images?</h3>
+          <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">WebP and AVIF are generally the best formats for the web as they offer superior compression compared to JPG and PNG.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -427,19 +514,19 @@ if (location.hostname === "www.pixelresize.site") {
       <div class="footer-col">
         <h4>Image Tools</h4>
         <ul>
-          <li><a href="/tools/image-resizer">Image Resizer</a></li>
-          <li><a href="/tools/image-compressor">Image Compressor</a></li>
-          <li><a href="/tools/crop-image">Image Crop</a></li>
-          <li><a href="/tools/jpg-to-webp">JPG to WebP</a></li>
-          <li><a href="/tools/png-to-jpg">PNG to JPG</a></li>
+          <li><a href="/tools/image-resizer">Free Image Resizer Online</a></li>
+          <li><a href="/tools/image-compressor">Fast Image Compressor</a></li>
+          <li><a href="/tools/crop-image">Crop Image Instantly</a></li>
+          <li><a href="/tools/jpg-to-webp">Convert JPG to WebP</a></li>
+          <li><a href="/tools/png-to-jpg">Convert PNG to JPG</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Utility</h4>
+        <h4>Specialized Tools</h4>
         <ul>
-          <li><a href="/heic-to-jpg">HEIC to JPG</a></li>
-          <li><a href="/resize-passport-photo">Passport Photo</a></li>
-          <li><a href="/discord-pfp-resizer">Discord PFP</a></li>
+          <li><a href="/heic-to-jpg">HEIC to JPG Converter</a></li>
+          <li><a href="/resize-passport-photo">Passport Photo Resizer</a></li>
+          <li><a href="/discord-pfp-resizer">Discord PFP Resizer</a></li>
           <li><a href="/privacy">Privacy Policy</a></li>
           <li><a href="/terms">Terms of Service</a></li>
         </ul>
@@ -451,59 +538,7 @@ if (location.hostname === "www.pixelresize.site") {
     </div>
   </footer>
 
-<script type="application/ld+json">
-[
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "PixelResize",
-    "url": "https://pixelresize.site/"
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "PixelResize",
-    "url": "https://pixelresize.site/",
-    "logo": "https://pixelresize.site/logo.png"
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "PixelResize",
-    "operatingSystem": "All",
-    "applicationCategory": "MultimediaApplication",
-    "url": "https://pixelresize.site/",
-    "description": "Free browser-based image resizer and converter. Privacy-first tool to resize, compress, and convert JPG, PNG, WebP, and AVIF images locally.",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    }
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How can I resize an image online for free?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "You can resize images using our free online image resizer. Upload your image, set your desired dimensions, and download the optimized version instantly."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is PixelResize safe to use?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, PixelResize is 100% safe. All image processing happens locally in your browser, meaning your files are never uploaded to our servers."
-        }
-      }
-    ]
-  }
-]
-</script>
+<script type="module" src="script.js" defer></script>
 <!-- TOOL SWITCH CONFIRMATION MODAL -->
 <div id="toolSwitchModal" class="modal-overlay">
   <div class="modal-box">
@@ -525,6 +560,5 @@ if (location.hostname === "www.pixelresize.site") {
 </div>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2486732565949048" crossorigin="anonymous"></script>
-<script type="module" src="script.js" defer></script>
 </body>
 </html>

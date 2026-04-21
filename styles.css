@@ -495,12 +495,12 @@ h1, h2, h3 {
 }
 
 section {
-  padding: 80px 0;
+  padding: 100px 0 60px;
 }
 
 @media (max-width: 768px) {
   section {
-    padding: 60px 0;
+    padding: 80px 0 40px;
   }
 }
 
@@ -744,7 +744,7 @@ section {
 
 /* Hero Section */
 .hero {
-  padding: 80px 0 60px;
+  padding: 100px 0 60px;
   background: linear-gradient(180deg, rgba(248, 250, 252, 0) 0%, rgba(79, 70, 229, 0.04) 100%),
               radial-gradient(circle at 90% 10%, rgba(79, 70, 229, 0.08), transparent 40%),
               radial-gradient(circle at 10% 90%, rgba(129, 140, 248, 0.08), transparent 40%);
@@ -754,7 +754,7 @@ section {
 
 @media (max-width: 768px) {
   .hero {
-    padding: 60px 0 40px;
+    padding: 80px 0 40px;
   }
 }
 
@@ -918,7 +918,7 @@ section {
 .seo-block {
     background: white;
     border-radius: 24px;
-    padding: 48px;
+    padding: 64px;
     border: 1px solid var(--border);
     box-shadow: var(--shadow);
 }
@@ -1414,7 +1414,7 @@ section {
 
 /* Tools Section */
 .tools-section {
-    padding: 40px 0;
+    padding: 100px 0 60px;
     content-visibility: auto;
     contain-intrinsic-size: 1px 1000px;
 }
@@ -1506,8 +1506,7 @@ section {
 
 /* BLOG SECTION */
 .blog-section {
-    margin-top: 80px;
-    padding: 60px 20px;
+    padding: 100px 20px 60px;
     background: #f9fafc;
     text-align: center;
 }
@@ -1567,7 +1566,7 @@ section {
 
 /* Benefits & Tool Details */
 .benefits-section {
-    padding: 40px 0;
+    padding: 100px 0 60px;
     border-bottom: 1px solid var(--border);
 }
 
@@ -1644,7 +1643,7 @@ section {
 
 /* FAQ */
 .faq-section {
-    padding: 40px 0;
+    padding: 100px 0 60px;
     background: var(--white);
     content-visibility: auto;
     contain-intrinsic-size: 1px 500px;
