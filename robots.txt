@@ -1,5 +1,4 @@
 User-agent: *
-Allow: /
+Disallow:
 
-# Sitemap Location
 Sitemap: https://pixelresize.site/sitemap.xml
