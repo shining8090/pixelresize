@@ -560,12 +560,14 @@ if (dropZone) {
         if (!pendingSettings) return;
         if (pendingSettings.format && selectFormat) {
             selectFormat.value = pendingSettings.format;
-            // Trigger change event to update quality slider visibility
             selectFormat.dispatchEvent(new Event('change'));
         }
         if (pendingSettings.quality && inputQuality) {
             inputQuality.value = pendingSettings.quality;
             if (qualityLabel) qualityLabel.textContent = `${pendingSettings.quality}%`;
+        }
+        if (pendingSettings.targetSize) {
+            reachTargetSize(pendingSettings.targetSize);
         }
         pendingSettings = null;
     }
@@ -694,6 +696,11 @@ if (dropZone) {
     });
 
     function applyToolRequest(tool, format, preset) {
+        const params = new URLSearchParams(window.location.search);
+        const targetValue = params.get('target');
+        const widthValue = params.get('width');
+        const heightValue = params.get('height');
+
         // 1. Activate correct tab
         let tabToClick = null;
         if (tool === 'resize') tabToClick = document.querySelector('.tab-btn[data-tab="resize"]');
@@ -711,17 +718,33 @@ if (dropZone) {
                                 format === 'png' ? 'image/png' : 'image/jpeg';
             if (selectFormat) {
                 selectFormat.value = formatValue;
-                // Update format summary
                 updateSummary();
             }
             
-            // If there's a format chip, sync it
             const chip = document.querySelector(`.chip-btn[data-format="${formatValue}"]`);
             if (chip) {
                 document.querySelectorAll('.chip-grid[data-target="select-format"] .chip-btn').forEach(b => b.classList.remove('active'));
                 chip.classList.add('active');
             }
         }
+
+        // 3. Handle Other Params
+        if (targetValue) {
+            const targetKB = parseInt(targetValue);
+            if (!isNaN(targetKB)) {
+                // Find and activate target chip if it exists
+                const targetChip = document.querySelector(`.chip-btn[data-target="${targetKB}"]`);
+                if (targetChip) {
+                    document.querySelectorAll('#target-presets .chip-btn').forEach(b => b.classList.remove('active'));
+                    targetChip.classList.add('active');
+                }
+                // We'll run reachTargetSize once an image is uploaded/assigned
+                pendingSettings = { ...pendingSettings, targetSize: targetKB };
+            }
+        }
+
+        if (widthValue && inputWidth) inputWidth.value = widthValue;
+        if (heightValue && inputHeight) inputHeight.value = heightValue;
 
         // 3. Set presets
         if (preset === 'passport') {
